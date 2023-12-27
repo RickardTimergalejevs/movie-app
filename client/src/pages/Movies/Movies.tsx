@@ -1,5 +1,11 @@
+import MovieList from '../../components/MovieList/MovieList'
+
 const Movies = () => {
-  return <div>Movies</div>
+  return (
+    <div>
+      <MovieList />
+    </div>
+  )
 }
 
 export default Movies
