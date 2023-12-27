@@ -1,0 +1,25 @@
+@import '../../../styles/variables';
+
+footer {
+  background-color: $dark-light;
+  border-top: 2px solid $light;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 4rem;
+  text-transform: uppercase;
+
+  .footer__logo {
+    .footer__text {
+      font-family: $Libre-Barcode;
+      font-size: 3rem;
+    }
+  }
+
+  .footer__payment {
+    border-top: 1px solid $light;
+    padding-top: 3rem;
+    margin-top: 3rem;
+  }
+}
