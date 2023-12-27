@@ -14,3 +14,13 @@
   font-weight: $regular;
   color: $light;
 }
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a {
+  color: $light;
+  text-decoration: none;
+}
