@@ -1,13 +1,14 @@
 import './App.scss'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
     <>
       <Header />
       <main>
-        <h1>App</h1>
+        <Outlet />
       </main>
       <Footer />
     </>
