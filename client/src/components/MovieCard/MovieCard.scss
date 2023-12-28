@@ -22,13 +22,24 @@
       align-items: center;
       position: absolute;
       background-color: $light;
-      color: $green;
       font-family: $Archivo-Black;
       font-size: 2rem;
       width: 3rem;
       height: 3rem;
       top: 2rem;
       right: -1rem;
+
+      &--green {
+        color: $green;
+      }
+
+      &--yellow {
+        color: $yellow;
+      }
+
+      &--red {
+        color: $red;
+      }
     }
   }
 

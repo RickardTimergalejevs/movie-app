@@ -8,7 +8,6 @@ const MovieList = () => {
     error: moviesError,
     isLoading: moviesLoading,
   } = useGetPlayingMoviesQuery(1)
-  console.log()
 
   return (
     <div className="movie__list">

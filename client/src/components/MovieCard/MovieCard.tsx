@@ -27,10 +27,24 @@ const MovieCard = ({ title, poster_path, vote_average, genre_ids }: Props) => {
     return genre?.name || 'Unkown Genre'
   }
 
+  const roundedVoteAverage = Math.round(vote_average)
+
+  let ratingColorClass = ''
+
+  if (roundedVoteAverage >= 7) {
+    ratingColorClass = 'movie__card-rating--green'
+  } else if (roundedVoteAverage >= 5) {
+    ratingColorClass = 'movie__card-rating--yellow'
+  } else if (roundedVoteAverage <= 4) {
+    ratingColorClass = 'movie__card-rating--red'
+  }
+
   return (
     <div className="movie__card">
       <div className="movie__card-body">
-        <p className="movie__card-rating">{vote_average.toFixed(0)}</p>
+        <p className={`movie__card-rating ${ratingColorClass}`}>
+          {roundedVoteAverage}
+        </p>
         <img className="movie__card-img" src={poster_path} alt={title} />
       </div>
       <div className="movie__card-details">
