@@ -1,7 +1,9 @@
 import { useGetGenresQuery } from '../../redux/services/movies'
 import './MovieCard.scss'
+import { Link } from 'react-router-dom'
 
 type Props = {
+  id: number
   title: string
   poster_path: string
   vote_average: number
@@ -17,6 +19,7 @@ type Genre = {
 }
 
 const MovieCard = ({
+  id,
   title,
   poster_path,
   vote_average,
@@ -55,7 +58,9 @@ const MovieCard = ({
           </p>
         )}
         {showDate && <p className="movie__card-date">{release_date}</p>}
-        <img className="movie__card-img" src={poster_path} alt={title} />
+        <Link to={`/movie/${id}`}>
+          <img className="movie__card-img" src={poster_path} alt={title} />
+        </Link>
       </div>
       <div className="movie__card-details">
         <h1 className="movie__card-title">{title}</h1>
