@@ -28,6 +28,10 @@ interface IMovieListResponse {
   total_results: number
 }
 
+interface IGenreListResponse {
+  genres: []
+}
+
 export const moviesApi = createApi({
   reducerPath: 'moviesApi',
   baseQuery: fetchBaseQuery({
@@ -43,7 +47,14 @@ export const moviesApi = createApi({
     getUpcomingMovies: builder.query<IMovieListResponse, number>({
       query: (page: number) => `movie/upcoming?language=en-US&page=${page}`,
     }),
+    getGenres: builder.query<IGenreListResponse, void>({
+      query: () => `genre/movie/list?language=en`,
+    }),
   }),
 })
 
-export const { useGetPlayingMoviesQuery, useGetUpcomingMoviesQuery } = moviesApi
+export const {
+  useGetPlayingMoviesQuery,
+  useGetUpcomingMoviesQuery,
+  useGetGenresQuery,
+} = moviesApi
