@@ -1,0 +1,24 @@
+@import '../../../styles/variables';
+
+.movie__page {
+  .movie__page-nav {
+    position: relative;
+    height: 3rem;
+    text-align: center;
+
+    hr {
+      position: relative;
+      top: 1.5rem;
+      border: 1px solid $light;
+    }
+
+    .movie__page-title {
+      position: relative;
+      display: inline-block;
+      font-family: $Archivo-Black;
+      text-transform: uppercase;
+      background-color: $dark;
+      padding: 0 2rem;
+    }
+  }
+}
