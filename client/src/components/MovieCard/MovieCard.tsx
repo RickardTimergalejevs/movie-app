@@ -6,6 +6,9 @@ type Props = {
   poster_path: string
   vote_average: number
   genre_ids: number[]
+  release_date: string
+  showDate?: boolean
+  showRating?: boolean
 }
 
 type Genre = {
@@ -13,12 +16,16 @@ type Genre = {
   name: string
 }
 
-const MovieCard = ({ title, poster_path, vote_average, genre_ids }: Props) => {
-  const {
-    data: genres,
-    error: genresError,
-    isLoading: genresLoading,
-  } = useGetGenresQuery()
+const MovieCard = ({
+  title,
+  poster_path,
+  vote_average,
+  genre_ids,
+  release_date,
+  showDate,
+  showRating,
+}: Props) => {
+  const { data: genres } = useGetGenresQuery()
 
   const genresData = genres as { genres: Genre[] } | undefined
 
@@ -29,7 +36,7 @@ const MovieCard = ({ title, poster_path, vote_average, genre_ids }: Props) => {
 
   const roundedVoteAverage = Math.round(vote_average)
 
-  let ratingColorClass = ''
+  let ratingColorClass
 
   if (roundedVoteAverage >= 7) {
     ratingColorClass = 'movie__card-rating--green'
@@ -42,9 +49,12 @@ const MovieCard = ({ title, poster_path, vote_average, genre_ids }: Props) => {
   return (
     <div className="movie__card">
       <div className="movie__card-body">
-        <p className={`movie__card-rating ${ratingColorClass}`}>
-          {roundedVoteAverage}
-        </p>
+        {showRating && (
+          <p className={`movie__card-rating ${ratingColorClass}`}>
+            {roundedVoteAverage}
+          </p>
+        )}
+        {showDate && <p className="movie__card-date">{release_date}</p>}
         <img className="movie__card-img" src={poster_path} alt={title} />
       </div>
       <div className="movie__card-details">
