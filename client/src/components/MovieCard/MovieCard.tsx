@@ -1,6 +1,8 @@
 import { useGetGenresQuery } from '../../redux/services/movies'
 import './MovieCard.scss'
 import { Link } from 'react-router-dom'
+import '../../utils/ratingHelper'
+import { getRatingColorClass, roundVoteAverage } from '../../utils/ratingHelper'
 
 type Props = {
   id: number
@@ -37,24 +39,12 @@ const MovieCard = ({
     return genre?.name || 'Unkown Genre'
   }
 
-  const roundedVoteAverage = Math.round(vote_average)
-
-  let ratingColorClass
-
-  if (roundedVoteAverage >= 7) {
-    ratingColorClass = 'movie__card-rating--green'
-  } else if (roundedVoteAverage >= 5) {
-    ratingColorClass = 'movie__card-rating--yellow'
-  } else if (roundedVoteAverage <= 4) {
-    ratingColorClass = 'movie__card-rating--red'
-  }
-
   return (
     <div className="movie__card">
       <div className="movie__card-body">
         {showRating && (
-          <p className={`movie__card-rating ${ratingColorClass}`}>
-            {roundedVoteAverage}
+          <p className={`movie-rating ${getRatingColorClass(vote_average)}`}>
+            {roundVoteAverage(vote_average)}
           </p>
         )}
         {showDate && <p className="movie__card-date">{release_date}</p>}

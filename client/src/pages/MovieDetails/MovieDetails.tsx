@@ -1,5 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useGetMovieQuery } from '../../redux/services/movies'
+import './MovieDetails.scss'
+import MovieSession from '../../components/MovieSession/MovieSession'
+import { getRatingColorClass, roundVoteAverage } from '../../utils/ratingHelper'
 
 const MovieDetails = () => {
   const { id } = useParams()
@@ -13,25 +16,46 @@ const MovieDetails = () => {
   console.log(movie)
 
   return (
-    <div>
-      <img
-        src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
-        alt={movie?.title}
-        width={'300px'}
-      />
-      <h1>{movie?.title}</h1>
-      {movie?.genres.map((genre, key) => (
-        <div key={key}>
-          <p>{genre.name}</p>
+    <div className="movie-details__page">
+      <div className="movie-body">
+        <img
+          className="movie-body__img"
+          src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+          alt={movie?.title}
+        />
+        <div className="movie-description">
+          <p className="movie-description__title">Overview</p>
+          <p className="movie-description__overview">{movie?.overview}</p>
+          <p className="movie-description__title">Release Date</p>
+          <p className="movie-description__date">{movie?.release_date}</p>
         </div>
-      ))}
-      <p>{movie?.runtime} minutes</p>
-      <p>{movie?.adult === false && '12+'}</p>
-      <p>{movie?.vote_average}</p>
-      <p>Overview</p>
-      <p>{movie?.overview}</p>
-      <p>Release Date</p>
-      <p>{movie?.release_date}</p>
+      </div>
+      <div className="movie-container">
+        <div className="movie-details">
+          <h1 className="movie-details__title">{movie?.title}</h1>
+          <div className="movie-details__genres">
+            {movie?.genres.map((genre, key) => (
+              <p className="movie-details__genre" key={key}>
+                {genre.name}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="movie-info">
+          <p className="movie-info__runtime">{movie?.runtime} minutes</p>
+          <p className="movie-info__age">
+            <span>{movie?.adult === false && '12+'}</span>
+          </p>
+          <p
+            className={`movie-rating ${getRatingColorClass(
+              movie?.vote_average,
+            )}`}
+          >
+            {roundVoteAverage(movie?.vote_average)}
+          </p>
+        </div>
+        <MovieSession />
+      </div>
     </div>
   )
 }
