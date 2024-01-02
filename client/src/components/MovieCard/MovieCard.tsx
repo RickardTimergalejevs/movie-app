@@ -3,6 +3,7 @@ import './MovieCard.scss'
 import { Link } from 'react-router-dom'
 import '../../utils/ratingHelper'
 import { getRatingColorClass, roundVoteAverage } from '../../utils/ratingHelper'
+import { formatDateWithMonthAbbreviation } from '../../utils/dateFormatter'
 
 type Props = {
   id: number
@@ -47,7 +48,11 @@ const MovieCard = ({
             {roundVoteAverage(vote_average)}
           </p>
         )}
-        {showDate && <p className="movie__card-date">{release_date}</p>}
+        {showDate && (
+          <p className="movie__card-date">
+            {formatDateWithMonthAbbreviation(release_date)}
+          </p>
+        )}
         <Link to={`/movie/${id}`}>
           <img className="movie__card-img" src={poster_path} alt={title} />
         </Link>

@@ -13,5 +13,5 @@ export const getRatingColorClass = (voteAverage: number) => {
     return 'movie-rating--red'
   }
 
-  return
+  return ''
 }
