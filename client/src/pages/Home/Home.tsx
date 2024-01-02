@@ -1,5 +1,6 @@
 import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
 import './Home.scss'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const { data: playingMovies, error, isLoading } = useGetPlayingMoviesQuery(1)
@@ -27,7 +28,9 @@ const Home = () => {
       </div>
       <div className="home__page-details">
         <h1 className="home__page-movie-title">{playingMovie?.title}</h1>
-        <h1 className="home__page-title">Watch now</h1>
+        <Link to={`/movie/${playingMovie?.id}`}>
+          <h1 className="home__page-title">Watch now</h1>
+        </Link>
       </div>
     </div>
   )

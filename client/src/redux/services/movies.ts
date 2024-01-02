@@ -17,6 +17,26 @@ interface IMovie {
   vote_count: number
 }
 
+interface IGenre {
+  id: number
+  name: string
+}
+
+interface IMovieDetails extends IMovie {
+  belongs_to_collection: null
+  budget: number
+  genres: IGenre[]
+  homepage: string
+  imbd_id: string
+  production_companies: []
+  production_countries: []
+  revenue: number
+  runtime: number
+  spoken_languages: []
+  status: string
+  tagline: string
+}
+
 interface IMovieListResponse {
   dates: {
     maximum: string
@@ -42,13 +62,16 @@ export const moviesApi = createApi({
   }),
   endpoints: (builder) => ({
     getPlayingMovies: builder.query<IMovieListResponse, number>({
-      query: (page: number) => `movie/now_playing?language=en-US&page=${page}`,
+      query: (page) => `movie/now_playing?language=en-US&page=${page}`,
     }),
     getUpcomingMovies: builder.query<IMovieListResponse, number>({
-      query: (page: number) => `movie/upcoming?language=en-US&page=${page}`,
+      query: (page) => `movie/upcoming?language=en-US&page=${page}`,
     }),
     getGenres: builder.query<IGenreListResponse, void>({
       query: () => `genre/movie/list?language=en`,
+    }),
+    getMovie: builder.query<IMovieDetails, number>({
+      query: (id) => `movie/${id}`,
     }),
   }),
 })
@@ -57,4 +80,5 @@ export const {
   useGetPlayingMoviesQuery,
   useGetUpcomingMoviesQuery,
   useGetGenresQuery,
+  useGetMovieQuery,
 } = moviesApi

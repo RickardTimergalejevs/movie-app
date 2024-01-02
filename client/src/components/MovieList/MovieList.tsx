@@ -43,6 +43,7 @@ const MovieList = ({ movies, showDate, showRating }: Props) => {
       {movies?.results.map((movie) => (
         <MovieCard
           key={movie.id}
+          id={movie.id}
           title={movie.title}
           poster_path={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
           vote_average={movie.vote_average}

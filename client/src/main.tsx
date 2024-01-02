@@ -11,6 +11,7 @@ import Upcoming from './pages/Upcoming/Upcoming.tsx'
 import Profile from './pages/Profile/Profile.tsx'
 import App from './App.tsx'
 import { store } from './redux/store.ts'
+import MovieDetails from './pages/MovieDetails/MovieDetails.tsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/movies',
         element: <Movies />,
+      },
+      {
+        path: '/movie/:id',
+        element: <MovieDetails />,
       },
       {
         path: '/upcoming',

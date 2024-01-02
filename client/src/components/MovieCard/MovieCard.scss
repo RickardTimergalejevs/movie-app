@@ -17,7 +17,7 @@
       cursor: pointer;
     }
 
-    .movie__card-rating {
+    .movie-rating {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -48,7 +48,8 @@
       position: absolute;
       background-color: $light;
       color: $dark;
-      font-size: 1rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
       padding: 0.2rem 0.6rem;
       left: 50%;
       transform: translate(-50%, -50%);
