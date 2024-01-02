@@ -3,7 +3,10 @@ import { useGetMovieQuery } from '../../redux/services/movies'
 import './MovieDetails.scss'
 import MovieSession from '../../components/MovieSession/MovieSession'
 import { getRatingColorClass, roundVoteAverage } from '../../utils/ratingHelper'
-import { formatDateWithMonthAbbreviation } from '../../utils/dateFormatter'
+import {
+  convertToHoursAndMinutes,
+  formatDateWithMonthAbbreviation,
+} from '../../utils/dateFormatter'
 
 const MovieDetails = () => {
   const { id } = useParams()
@@ -46,9 +49,11 @@ const MovieDetails = () => {
             </div>
           </div>
           <div className="movie-info">
-            <p className="movie-info__runtime">{movie.runtime} minutes</p>
+            <p className="movie-info__runtime">
+              {convertToHoursAndMinutes(movie.runtime)}
+            </p>
             <p className="movie-info__age">
-              <span>{movie.adult === false && '12+'}</span>
+              <span>{movie.adult === false ? '12+' : '18+'}</span>
             </p>
             <p
               className={`movie-rating ${getRatingColorClass(

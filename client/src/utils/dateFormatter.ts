@@ -22,3 +22,13 @@ export const formatDateWithMonthAbbreviation = (date: string) => {
 
   return `${day} ${monthAbbreviation} ${year}`
 }
+
+export const convertToHoursAndMinutes = (minutes: number) => {
+  const hours = Math.floor(minutes / 60)
+  const remainingMinutes = minutes % 60
+
+  const hoursString = hours > 0 ? `${hours} h` : ''
+  const minutesString = remainingMinutes > 0 ? `${remainingMinutes} min` : ''
+
+  return `${hoursString} ${minutesString}`.trim()
+}
