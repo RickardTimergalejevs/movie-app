@@ -18,13 +18,15 @@ const getAllSessions = async (req: Request, res: Response) => {
   }
 }
 
-const getSessionsByMovieId = async (req: Request, res: Response) => {
+const getSessionsByMovieIdAndDate = async (req: Request, res: Response) => {
   try {
-    const movieId = req.params.id
+    const { id, date } = req.params
 
-    const session = await SessionModel.find({ movieId }).populate<{
-      hall: IHall
-    }>('hall')
+    const session = await SessionModel.find({ movieId: id, showDate: date })
+      .sort({ showDate: 1, showTime: 1 })
+      .populate<{
+        hall: IHall
+      }>('hall')
 
     if (!session) {
       res.status(404).json({ message: 'Sessions not found for this movieId' })
@@ -59,4 +61,4 @@ const createSession = async (req: Request, res: Response) => {
   }
 }
 
-export { getAllSessions, getSessionsByMovieId, createSession }
+export { getAllSessions, getSessionsByMovieIdAndDate, createSession }
