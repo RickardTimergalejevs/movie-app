@@ -3,6 +3,7 @@
 .session-body {
   display: flex;
   flex-direction: column;
+  margin: 0 3rem;
 
   .session-datepicker {
     display: flex;
@@ -139,6 +140,24 @@
         display: flex;
         gap: 1rem;
       }
+    }
+  }
+
+  .session-purchase {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    &__total {
+    }
+
+    &__btn {
+      background-color: $green;
+      border: none;
+      font-family: $Archivo-Black;
+      text-transform: uppercase;
+      padding: 0.5rem;
+      cursor: pointer;
     }
   }
 }
