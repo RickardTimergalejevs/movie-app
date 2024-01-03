@@ -1,11 +1,11 @@
 import { Schema, model, models } from 'mongoose'
 
-interface ISeat {
+export interface ISeat {
   seat: string
   isBooked: boolean
 }
 
-interface IRow {
+export interface IRow {
   row: string
   seats: ISeat[]
 }

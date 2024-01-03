@@ -2,3 +2,6 @@ GET http://localhost:3000/api/sessions/123456
 
 ###
 GET http://localhost:3000/api/sessions
+
+###
+POST http://localhost:3000/api/halls
