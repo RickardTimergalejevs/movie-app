@@ -1,6 +1,6 @@
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model, models, Types } from 'mongoose'
 
-interface ISession {
+export interface ISession {
   movieId: string
   city: string
   hall: Types.ObjectId
@@ -18,6 +18,6 @@ export const sessionSchema = new Schema<ISession>({
   displayType: { type: String, enum: ['2D', '3D', 'IMAX'], required: true },
 })
 
-const SessionModel = model<ISession>('Session', sessionSchema)
+const SessionModel = models.session || model<ISession>('Session', sessionSchema)
 
 export default SessionModel

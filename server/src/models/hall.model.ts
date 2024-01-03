@@ -10,7 +10,7 @@ interface IRow {
   seats: ISeat[]
 }
 
-interface IHall {
+export interface IHall {
   name: string
   capacity: number
   rows: IRow[]
