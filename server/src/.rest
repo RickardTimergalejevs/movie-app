@@ -1,0 +1,1 @@
+GET http://localhost:3000/session-details/659540ee4c0a96aabcba63b5
