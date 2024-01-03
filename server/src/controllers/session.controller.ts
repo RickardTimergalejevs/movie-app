@@ -1,6 +1,7 @@
 import { IHall } from '../models/hall.model'
-import SessionModel from '../models/session.model'
+import SessionModel, { ISession } from '../models/session.model'
 import { Request, Response } from 'express'
+import mongoose from 'mongoose'
 
 const getAllSessions = async (req: Request, res: Response) => {
   try {
@@ -36,4 +37,26 @@ const getSessionsByMovieId = async (req: Request, res: Response) => {
   }
 }
 
-export { getAllSessions, getSessionsByMovieId }
+const createSession = async (req: Request, res: Response) => {
+  const hall = new mongoose.Types.ObjectId('6595625feb9e39dd29e79748')
+
+  try {
+    const session: ISession = {
+      movieId: '848326',
+      city: 'Stockholm',
+      hall: hall,
+      showDate: '22.12.2024',
+      showTime: '10:00',
+      displayType: '3D',
+    }
+
+    const createdSession = await SessionModel.create(session)
+
+    res.status(201).json(createdSession)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+}
+
+export { getAllSessions, getSessionsByMovieId, createSession }
