@@ -1,4 +1,3 @@
-import React from 'react'
 import Seat from '../Seat/Seat'
 import { ISession } from '../../interfaces/session'
 
@@ -18,7 +17,13 @@ const MovieHall = ({ selectedSession }: Props) => {
             <p className="session-row__letter">{row.row}</p>
             <div className="session-seat-list">
               {row.seats.map((seat) => (
-                <Seat key={seat._id} />
+                <Seat
+                  type="default"
+                  isSessionSeat={true}
+                  id={seat._id}
+                  isBooked={seat.isBooked}
+                  key={seat._id}
+                />
               ))}
             </div>
             <p className="session-row__letter">{row.row}</p>
@@ -27,15 +32,15 @@ const MovieHall = ({ selectedSession }: Props) => {
       </div>
       <div className="session-seats-info">
         <div className="session-seat__selected">
-          <Seat color={'green'} />
+          <Seat type="selected" />
           <p>Selected</p>
         </div>
         <div className="session-seat__available">
-          <Seat color={'gray'} />
+          <Seat type="available" />
           <p>Available</p>
         </div>
         <div className="session-seat__taken">
-          <Seat color={'red'} />
+          <Seat type="taken" />
           <p>Taken</p>
         </div>
       </div>

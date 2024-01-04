@@ -46,11 +46,15 @@ const MovieSession = () => {
           selectedSession={selectedSession}
           setSelectedSession={setSelectedSession}
         />
-        {selectedSession && <MovieHall selectedSession={selectedSession} />}
-        <div className="session-purchase">
-          <p className="session-purchase__total">Total: 0 kr</p>
-          <button className="session-purchase__btn">Checkout</button>
-        </div>
+        {selectedSession && (
+          <>
+            <MovieHall selectedSession={selectedSession} />
+            <div className="session-purchase">
+              <p className="session-purchase__total">Total: 0 kr</p>
+              <button className="session-purchase__btn">Checkout</button>
+            </div>
+          </>
+        )}
       </div>
     )
   )

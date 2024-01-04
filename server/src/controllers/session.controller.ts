@@ -27,6 +27,7 @@ const getSessionsByMovieIdAndDate = async (req: Request, res: Response) => {
       .populate<{
         hall: IHall
       }>('hall')
+      .lean()
 
     if (!session) {
       res.status(404).json({ message: 'Sessions not found for this movieId' })
