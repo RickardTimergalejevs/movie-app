@@ -4,31 +4,7 @@ import {
   formatDayOfWeek,
   formatToDay,
 } from '../../utils/dateFormatter'
-
-interface ISeat {
-  isBooked: boolean
-  seat: string
-}
-
-interface IRow {
-  row: string
-  seats: ISeat[]
-}
-
-interface ISession {
-  _id: string
-  movieId: string
-  city: string
-  showDate: string
-  showTime: string
-  displayType: string
-  hall: {
-    _id: string
-    name: string
-    capacity: number
-    rows: IRow[]
-  }
-}
+import { ISession } from '../../interfaces/session'
 
 type Props = {
   sessions: ISession[]

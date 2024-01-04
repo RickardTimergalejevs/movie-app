@@ -3,11 +3,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 interface ISeat {
   isBooked: boolean
   seat: string
+  _id: string
 }
 
 interface IRow {
   row: string
   seats: ISeat[]
+  _id: string
 }
 
 interface ISessionListResponse {

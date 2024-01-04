@@ -1,29 +1,6 @@
 import React from 'react'
-
-interface ISeat {
-  isBooked: boolean
-  seat: string
-}
-
-interface IRow {
-  row: string
-  seats: ISeat[]
-}
-
-interface ISession {
-  _id: string
-  movieId: string
-  city: string
-  showDate: string
-  showTime: string
-  displayType: string
-  hall: {
-    _id: string
-    name: string
-    capacity: number
-    rows: IRow[]
-  }
-}
+import Seat from '../Seat/Seat'
+import { ISession } from '../../interfaces/session'
 
 type Props = {
   selectedSession: ISession
@@ -36,15 +13,12 @@ const MovieHall = ({ selectedSession }: Props) => {
         <p className="session-screen__title">Screen</p>
       </div>
       <div className="session-row-list">
-        {selectedSession.hall.rows.map((row, key) => (
-          <div className="session-row" key={key}>
+        {selectedSession.hall.rows.map((row) => (
+          <div className="session-row" key={row._id}>
             <p className="session-row__letter">{row.row}</p>
             <div className="session-seat-list">
-              {row.seats.map((seat, key) => (
-                <div className="session-seat" key={key}>
-                  <div className="session-seat__top"></div>
-                  <div className="session-seat__bottom"></div>
-                </div>
+              {row.seats.map((seat) => (
+                <Seat key={seat._id} />
               ))}
             </div>
             <p className="session-row__letter">{row.row}</p>
@@ -53,24 +27,15 @@ const MovieHall = ({ selectedSession }: Props) => {
       </div>
       <div className="session-seats-info">
         <div className="session-seat__selected">
-          <div className="session-seat">
-            <div className="session-seat__top--green"></div>
-            <div className="session-seat__bottom--green"></div>
-          </div>
+          <Seat color={'green'} />
           <p>Selected</p>
         </div>
         <div className="session-seat__available">
-          <div className="session-seat">
-            <div className="session-seat__top"></div>
-            <div className="session-seat__bottom"></div>
-          </div>
+          <Seat color={'gray'} />
           <p>Available</p>
         </div>
         <div className="session-seat__taken">
-          <div className="session-seat">
-            <div className="session-seat__top--red"></div>
-            <div className="session-seat__bottom--red"></div>
-          </div>
+          <Seat color={'red'} />
           <p>Taken</p>
         </div>
       </div>

@@ -4,31 +4,7 @@ import { useGetSessionsByMovieIdAndDateQuery } from '../../redux/services/sessio
 import './MovieSession.scss'
 import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
-
-interface ISeat {
-  isBooked: boolean
-  seat: string
-}
-
-interface IRow {
-  row: string
-  seats: ISeat[]
-}
-
-interface ISession {
-  _id: string
-  movieId: string
-  city: string
-  showDate: string
-  showTime: string
-  displayType: string
-  hall: {
-    _id: string
-    name: string
-    capacity: number
-    rows: IRow[]
-  }
-}
+import { ISession } from '../../interfaces/session'
 
 const MovieSession = () => {
   const { id } = useParams()
