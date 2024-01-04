@@ -38,6 +38,8 @@ const MovieSession = () => {
   const [selectedDate, setSelectedDate] = useState<string>('21.12.2024')
   const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
 
+  console.log(selectedDate)
+
   const {
     data: sessions,
     error,
@@ -45,13 +47,24 @@ const MovieSession = () => {
   } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
   console.log(sessions)
 
-  const getUniqueDate = () => {
-    return Array.from(new Set(sessions?.map((session) => session.showDate)))
+  const getUniqueDates = () => {
+    let dates = []
+
+    for (let i = 0; i < 5; i++) {
+      const date = new Date()
+      date.setDate(date.getDate() + i)
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const day = String(date.getDate()).padStart(2, '0')
+      const formattedDate = `${year}.${month}.${day}`
+      dates.push(formattedDate)
+    }
+
+    return dates
   }
 
   const handleDateClick = (date: string) => {
     setSelectedDate(date)
-    setSelectedSession(null)
   }
 
   const handleSessionClick = (session: ISession) => {
@@ -67,13 +80,11 @@ const MovieSession = () => {
               <p className="session-date__title">Date</p>
             </div>
             <div className="session-date__dates">
-              {getUniqueDate().map((date) => (
+              {getUniqueDates().map((date) => (
                 <div className="date" key={date}>
                   <button
                     className={`session-date__btn ${
-                      date === selectedSession?.showDate
-                        ? 'session-date__btn--selected'
-                        : ''
+                      date === selectedDate ? 'session-date__btn--selected' : ''
                     }`}
                     onClick={() => handleDateClick(date)}
                   >

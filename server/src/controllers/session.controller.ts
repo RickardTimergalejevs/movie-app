@@ -47,8 +47,8 @@ const createSession = async (req: Request, res: Response) => {
       movieId: '848326',
       city: 'Stockholm',
       hall: hall,
-      showDate: '22.12.2024',
-      showTime: '10:00',
+      showDate: '2024.01.07',
+      showTime: '18:00',
       displayType: '3D',
     }
 
