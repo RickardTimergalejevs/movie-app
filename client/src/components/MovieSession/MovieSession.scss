@@ -27,15 +27,22 @@
         .session-date__title {
           background-color: $light;
           color: $dark;
-          padding: 0.2rem;
+          padding: 0.2rem 0.4rem;
         }
       }
 
       &__dates {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
 
         .date {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
           .session-date__btn {
             padding: 0.2rem 0.4rem;
             background-color: $dark;
@@ -67,7 +74,7 @@
         .session-time__title {
           background-color: $light;
           color: $dark;
-          padding: 0.2rem;
+          padding: 0.2rem 0.4rem;
         }
       }
 

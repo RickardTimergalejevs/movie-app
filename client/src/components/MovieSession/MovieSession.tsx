@@ -2,6 +2,11 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetSessionsByMovieIdAndDateQuery } from '../../redux/services/sessions'
 import './MovieSession.scss'
+import {
+  formatDateWithWeekdayMonthAbbreviation,
+  formatDayOfWeek,
+  formatToDay,
+} from '../../utils/dateFormatter'
 
 interface ISeat {
   isBooked: boolean
@@ -35,10 +40,20 @@ const MovieSession = () => {
     return <div>Error: Movie ID is not provided</div>
   }
 
-  const [selectedDate, setSelectedDate] = useState<string>('21.12.2024')
-  const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
+  let dates: string[] = []
 
-  console.log(selectedDate)
+  for (let i = 0; i < 5; i++) {
+    const date = new Date()
+    date.setDate(date.getDate() + i)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const formattedDate = `${year}.${month}.${day}`
+    dates.push(formattedDate)
+  }
+
+  const [selectedDate, setSelectedDate] = useState<string>(dates[0])
+  const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
 
   const {
     data: sessions,
@@ -46,22 +61,6 @@ const MovieSession = () => {
     isLoading,
   } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
   console.log(sessions)
-
-  const getUniqueDates = () => {
-    let dates = []
-
-    for (let i = 0; i < 5; i++) {
-      const date = new Date()
-      date.setDate(date.getDate() + i)
-      const year = date.getFullYear()
-      const month = String(date.getMonth() + 1).padStart(2, '0')
-      const day = String(date.getDate()).padStart(2, '0')
-      const formattedDate = `${year}.${month}.${day}`
-      dates.push(formattedDate)
-    }
-
-    return dates
-  }
 
   const handleDateClick = (date: string) => {
     setSelectedDate(date)
@@ -77,18 +76,21 @@ const MovieSession = () => {
         <div className="session-datepicker">
           <div className="session-date">
             <div className="session-date__title-container">
-              <p className="session-date__title">Date</p>
+              <p className="session-date__title">
+                {formatDateWithWeekdayMonthAbbreviation(selectedDate)}
+              </p>
             </div>
             <div className="session-date__dates">
-              {getUniqueDates().map((date) => (
+              {dates.map((date) => (
                 <div className="date" key={date}>
+                  <p className="session-date__type">{formatDayOfWeek(date)}</p>
                   <button
                     className={`session-date__btn ${
                       date === selectedDate ? 'session-date__btn--selected' : ''
                     }`}
                     onClick={() => handleDateClick(date)}
                   >
-                    {date}
+                    {formatToDay(date)}
                   </button>
                 </div>
               ))}
