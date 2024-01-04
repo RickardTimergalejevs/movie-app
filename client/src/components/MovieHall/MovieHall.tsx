@@ -1,5 +1,6 @@
 import Seat from '../Seat/Seat'
 import { ISession } from '../../interfaces/session'
+import './MovieHall.scss'
 
 type Props = {
   selectedSession: ISession

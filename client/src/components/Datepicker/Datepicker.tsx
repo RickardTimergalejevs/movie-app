@@ -5,6 +5,7 @@ import {
   formatToDay,
 } from '../../utils/dateFormatter'
 import { ISession } from '../../interfaces/session'
+import './Datepicker.scss'
 
 type Props = {
   sessions: ISession[]
