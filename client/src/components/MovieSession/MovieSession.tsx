@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useGetSessionsByMovieIdAndDateQuery } from '../../redux/services/sessions'
 import './MovieSession.scss'
 import Datepicker from '../Datepicker/Datepicker'
+import MovieHall from '../MovieHall/MovieHall'
 
 interface ISeat {
   isBooked: boolean
@@ -69,52 +70,7 @@ const MovieSession = () => {
           selectedSession={selectedSession}
           setSelectedSession={setSelectedSession}
         />
-        {selectedSession && (
-          <div className="session-details">
-            <div className="session-screen">
-              <p className="session-screen__title">Screen</p>
-            </div>
-            <div className="session-row-list">
-              {selectedSession.hall.rows.map((row, key) => (
-                <div className="session-row" key={key}>
-                  <p className="session-row__letter">{row.row}</p>
-                  <div className="session-seat-list">
-                    {row.seats.map((seat, key) => (
-                      <div className="session-seat" key={key}>
-                        <div className="session-seat__top"></div>
-                        <div className="session-seat__bottom"></div>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="session-row__letter">{row.row}</p>
-                </div>
-              ))}
-            </div>
-            <div className="session-seats-info">
-              <div className="session-seat__selected">
-                <div className="session-seat">
-                  <div className="session-seat__top--green"></div>
-                  <div className="session-seat__bottom--green"></div>
-                </div>
-                <p>Selected</p>
-              </div>
-              <div className="session-seat__available">
-                <div className="session-seat">
-                  <div className="session-seat__top"></div>
-                  <div className="session-seat__bottom"></div>
-                </div>
-                <p>Available</p>
-              </div>
-              <div className="session-seat__taken">
-                <div className="session-seat">
-                  <div className="session-seat__top--red"></div>
-                  <div className="session-seat__bottom--red"></div>
-                </div>
-                <p>Taken</p>
-              </div>
-            </div>
-          </div>
-        )}
+        {selectedSession && <MovieHall selectedSession={selectedSession} />}
         <div className="session-purchase">
           <p className="session-purchase__total">Total: 0 kr</p>
           <button className="session-purchase__btn">Checkout</button>
