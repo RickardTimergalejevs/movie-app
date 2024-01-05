@@ -1,12 +1,116 @@
 import Seat from '../Seat/Seat'
 import { ISession } from '../../interfaces/session'
 import './MovieHall.scss'
+import { useState } from 'react'
 
 type Props = {
   selectedSession: ISession
 }
 
 const MovieHall = ({ selectedSession }: Props) => {
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([])
+  const [selectedSeatCount, setSelectedSeatCount] = useState<number>(1)
+  const [hoveredSeats, setHoveredSeats] = useState<{
+    status: string
+    seats: string[]
+  }>({
+    status: 'visible',
+    seats: [],
+  })
+
+  console.log('selectedSeats', selectedSeats)
+  console.log('hoveredSeats', hoveredSeats)
+
+  const getMaxIndexForRow = (row: string) => {
+    const selectedRow = selectedSession.hall.rows.find((r) => r.row === row)
+
+    return selectedRow ? selectedRow.seats.length : 0
+  }
+
+  const handleSeatClick = (
+    row: string,
+    seatIndex: number,
+    isBooked: boolean,
+  ) => {
+    const isAnyHoveredSeatBooked = hoveredSeats.seats.some((hoveredSeat) =>
+      selectedSession.hall.rows.some((hallRow) =>
+        hallRow.seats.some(
+          (seat) => seat.seat === hoveredSeat && seat.isBooked,
+        ),
+      ),
+    )
+
+    if (!isBooked && !isAnyHoveredSeatBooked) {
+      const selectedSeats: string[] = []
+
+      for (let i = seatIndex; i < seatIndex + selectedSeatCount; i++) {
+        const maxIndex = getMaxIndexForRow(row)
+
+        if (i >= 0 && i < maxIndex + 1) {
+          const newSeat = `${row}${i}`
+          selectedSeats.push(newSeat)
+        } else {
+          console.error(
+            'A seat index selected that exceeds the maximum permissible value',
+          )
+          return
+        }
+      }
+
+      setSelectedSeats(selectedSeats)
+    }
+  }
+
+  const handleSeatHover = (
+    row: string,
+    seatIndex: number,
+    isBooked: boolean,
+  ) => {
+    if (!isBooked) {
+      const hoveredSeats: string[] = []
+
+      for (let i = seatIndex; i < seatIndex + selectedSeatCount; i++) {
+        const maxIndex = getMaxIndexForRow(row)
+
+        if (i >= 0 && i < maxIndex + 1) {
+          const newSeat = `${row}${i}`
+          hoveredSeats.push(newSeat)
+        } else {
+          setHoveredSeats({
+            status: 'error',
+            seats: hoveredSeats,
+          })
+
+          console.error(
+            'A seat index selected that exceeds the maximum permissible value',
+          )
+          return
+        }
+      }
+
+      const isAnySeatAlreadyBooked = hoveredSeats.some((hoveredSeat) =>
+        selectedSession.hall.rows.some((row) =>
+          row.seats.some((seat) => seat.seat === hoveredSeat && seat.isBooked),
+        ),
+      )
+
+      const status = isAnySeatAlreadyBooked ? 'error' : 'visible'
+
+      setHoveredSeats({
+        status,
+        seats: hoveredSeats,
+      })
+    }
+  }
+
+  const handleIncrement = () => {
+    setSelectedSeatCount((prevCount) => prevCount + 1)
+  }
+
+  const handleDecrement = () => {
+    setSelectedSeatCount((prevCount) => Math.max(1, prevCount - 1))
+  }
+
   return (
     <div className="session-details">
       <div className="session-screen">
@@ -17,13 +121,27 @@ const MovieHall = ({ selectedSession }: Props) => {
           <div className="session-row" key={row._id}>
             <p className="session-row__letter">{row.row}</p>
             <div className="session-seat-list">
-              {row.seats.map((seat) => (
+              {row.seats.map((seat, index) => (
                 <Seat
-                  type="default"
-                  isSessionSeat={true}
-                  id={seat._id}
-                  isBooked={seat.isBooked}
+                  type="session"
                   key={seat._id}
+                  id={seat._id}
+                  seat={seat.seat}
+                  isBooked={seat.isBooked}
+                  selectedSeats={selectedSeats}
+                  hoveredSeats={hoveredSeats}
+                  onSeatClick={() =>
+                    handleSeatClick(row.row, index + 1, seat.isBooked)
+                  }
+                  onSeatHover={() =>
+                    handleSeatHover(row.row, index + 1, seat.isBooked)
+                  }
+                  onSeatLeave={() =>
+                    setHoveredSeats({
+                      status: 'hidden',
+                      seats: [],
+                    })
+                  }
                 />
               ))}
             </div>
@@ -44,6 +162,11 @@ const MovieHall = ({ selectedSession }: Props) => {
           <Seat type="taken" />
           <p>Taken</p>
         </div>
+      </div>
+      <div>
+        <p onClick={handleIncrement}>+</p>
+        {selectedSeatCount}
+        <p onClick={handleDecrement}>-</p>
       </div>
     </div>
   )

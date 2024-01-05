@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   formatDateWithWeekdayMonthAbbreviation,
   formatDayOfWeek,
@@ -23,7 +23,7 @@ const Datepicker: React.FC<Props> = ({
   setSelectedDate,
   selectedSession,
   setSelectedSession,
-}: Props) => {
+}) => {
   const handleDateClick = (date: string) => {
     setSelectedDate(date)
   }
@@ -31,6 +31,10 @@ const Datepicker: React.FC<Props> = ({
   const handleSessionClick = (session: ISession) => {
     setSelectedSession(session)
   }
+
+  useEffect(() => {
+    setSelectedSession(sessions[0])
+  }, [sessions])
 
   return (
     <div className="session-datepicker">

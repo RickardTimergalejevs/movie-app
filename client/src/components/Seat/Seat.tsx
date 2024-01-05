@@ -1,34 +1,82 @@
-import { useState } from 'react'
 import './Seat.scss'
 
 type Props = {
-  type?: 'selected' | 'available' | 'taken' | 'default'
-  isSessionSeat?: boolean
+  type?: 'session' | 'selected' | 'available' | 'taken'
   id?: string
   isBooked?: boolean
+  selectedSeats?: string[]
+  seatIndex?: number
+  row?: string
+  seat?: string
+  onSeatClick?: () => void
+  hoveredSeats?: { status: string; seats: string[] }
+  onSeatHover?: () => void
+  onSeatLeave?: () => void
+  isHoverAvailable?: boolean
 }
 
-const Seat = ({ type, isSessionSeat = false, id, isBooked }: Props) => {
-  const [isSelected, setIsSelected] = useState(false)
+const Seat = ({
+  type,
+  id,
+  isBooked,
+  selectedSeats,
+  seat,
+  onSeatClick,
+  hoveredSeats,
+  onSeatHover,
+  onSeatLeave,
+}: Props) => {
+  const selected = selectedSeats && selectedSeats.includes(seat || '')
+  const hovered = hoveredSeats && hoveredSeats?.seats?.includes(seat || '')
 
   const seatTopClassName = `session-seat__top session-seat__top--${type}
-   ${isSelected && !isBooked ? 'session-seat__top--selected' : ''}
   ${isBooked ? 'session-seat__top--booked' : ''}
+  ${selected ? 'session-seat__top--selected' : ''}
+  ${
+    hovered
+      ? `session-seat__top--${
+          hoveredSeats.status === 'visible' ? 'hovered' : 'hovered-error'
+        }`
+      : ''
+  }
   `
   const seatBottomClassName = `session-seat__bottom session-seat__bottom--${type}
-   ${isSelected && !isBooked ? 'session-seat__bottom--selected' : ''}
   ${isBooked ? 'session-seat__bottom--booked' : ''}
+  ${selected ? 'session-seat__bottom--selected' : ''}
+  ${
+    hovered
+      ? `session-seat__bottom--${
+          hoveredSeats.status === 'visible' ? 'hovered' : 'hovered-error'
+        }`
+      : ''
+  }
   `
 
   const handleSeatClick = () => {
-    if (isSessionSeat && !isBooked) {
-      setIsSelected((prevSelected) => !prevSelected)
-      console.log(id)
+    if (onSeatClick) {
+      onSeatClick()
+    }
+  }
+
+  const handleMouseEnter = () => {
+    if (onSeatHover) {
+      onSeatHover()
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (onSeatLeave) {
+      onSeatLeave()
     }
   }
 
   return (
-    <div className="session-seat" onClick={handleSeatClick}>
+    <div
+      className="session-seat"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleSeatClick}
+    >
       <div className={seatTopClassName}></div>
       <div className={seatBottomClassName}></div>
     </div>

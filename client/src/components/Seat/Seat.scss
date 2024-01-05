@@ -12,7 +12,8 @@
     border-radius: 4px;
     background-color: $dark-extra-light;
 
-    &--default {
+    &--session {
+      background-color: $dark-extra-light;
       cursor: pointer;
     }
 
@@ -21,6 +22,7 @@
     }
 
     &--available {
+      background-color: $dark-extra-light;
     }
 
     &--taken {
@@ -31,16 +33,25 @@
       background-color: $red;
       cursor: not-allowed;
     }
+
+    &--hovered {
+      background-color: $dark;
+    }
+
+    &--hovered-error {
+      background-color: $red;
+      cursor: not-allowed;
+    }
   }
 
   &__bottom {
     height: 0.2rem;
   }
 
-  &:hover {
-    .session-seat__top--default,
-    .session-seat__bottom--default {
-      background-color: $dark;
-    }
-  }
+  //   &:hover {
+  //     .session-seat__top--default,
+  //     .session-seat__bottom--default {
+  //       background-color: $dark;
+  //     }
+  //   }
 }
