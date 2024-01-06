@@ -104,11 +104,13 @@ const MovieHall = ({ selectedSession }: Props) => {
   }
 
   const handleIncrement = () => {
-    setSelectedSeatCount((prevCount) => prevCount + 1)
+    setSelectedSeatCount((prevCount) => Math.min(prevCount + 1, 8))
+    setSelectedSeats([])
   }
 
   const handleDecrement = () => {
     setSelectedSeatCount((prevCount) => Math.max(1, prevCount - 1))
+    setSelectedSeats([])
   }
 
   return (
@@ -163,10 +165,16 @@ const MovieHall = ({ selectedSession }: Props) => {
           <p>Taken</p>
         </div>
       </div>
-      <div>
-        <p onClick={handleIncrement}>+</p>
-        {selectedSeatCount}
-        <p onClick={handleDecrement}>-</p>
+      <div className="session-seats-count">
+        <button className="session-seats-count__btn" onClick={handleDecrement}>
+          -
+        </button>
+        <p className="session-seats-count__selected">
+          Tickets: {selectedSeatCount}
+        </p>
+        <button className="session-seats-count__btn" onClick={handleIncrement}>
+          +
+        </button>
       </div>
     </div>
   )

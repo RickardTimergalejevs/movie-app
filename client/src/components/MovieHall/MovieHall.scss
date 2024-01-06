@@ -47,4 +47,28 @@
       gap: 1rem;
     }
   }
+
+  .session-seats-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+
+    &__btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      background-color: $dark-extra-light;
+      color: $light;
+      font-family: $DM-Sans;
+
+      &:hover {
+        background-color: $light;
+        color: $dark-extra-light;
+      }
+    }
+  }
 }
