@@ -1,0 +1,21 @@
+@import '../../../../styles/variables';
+
+.nav-btn {
+  padding: 0.5rem;
+  background-color: $light;
+  color: $dark;
+  font-family: $Archivo-Black;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+
+  &--light {
+    background-color: $light;
+    color: $dark;
+  }
+
+  &--green {
+    background-color: $green;
+    color: $dark;
+  }
+}

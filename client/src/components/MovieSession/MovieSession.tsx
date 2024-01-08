@@ -5,6 +5,7 @@ import './MovieSession.scss'
 import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
 import { ISession } from '../../interfaces/session'
+import NavButton from '../common/NavButton/NavButton'
 
 const MovieSession = () => {
   const { id } = useParams()
@@ -51,7 +52,7 @@ const MovieSession = () => {
             <MovieHall selectedSession={selectedSession} />
             <div className="session-purchase">
               <p className="session-purchase__total">Total: 0 kr</p>
-              <button className="session-purchase__btn">Checkout</button>
+              <NavButton children="Checkout" color="green" link="/checkout" />
             </div>
           </>
         )}

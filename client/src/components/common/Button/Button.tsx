@@ -17,11 +17,14 @@ const Button = ({
   size,
   border,
 }: Props) => {
+  const hasColor = color ? `btn--${color}` : ''
+  const hasSize = size ? `btn--${size}` : ''
+  const hasBorder = border ? `btn--${border}` : ''
   const isSelected = selected ? 'btn--selected' : ''
 
   return (
     <button
-      className={`btn btn--${color} btn--${size} btn--${border} ${isSelected}`}
+      className={`btn ${hasColor} ${hasSize} ${hasBorder} ${isSelected}`}
       onClick={onClick}
     >
       {children}
