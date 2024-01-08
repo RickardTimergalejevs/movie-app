@@ -47,7 +47,10 @@ const loginUser = async (req: Request, res: Response) => {
               .json({ message: 'Incorrect email or password' })
           }
 
-          res.status(200).json({ message: 'Logged in successfully' })
+          const token = user.generateAuthToken()
+          console.log(token)
+
+          res.status(200).json({ message: 'Logged in successfully', token })
         },
       )
     } else {

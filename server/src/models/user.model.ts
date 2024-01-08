@@ -1,5 +1,6 @@
 import { Schema, model, models } from 'mongoose'
 import bcrypt from 'bcrypt'
+import { generateAccessToken } from '../middleware/auth.middleware'
 
 export interface IUser {
   firstName: string
@@ -58,6 +59,18 @@ userSchema.methods.comparePassword = function (
       callback(null, isMatch)
     }
   })
+}
+
+userSchema.methods.generateAuthToken = function () {
+  const token = generateAccessToken({
+    _id: this._id,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    email: this.email,
+    location: this.location,
+    isAdmin: this.isAdmin,
+  })
+  return token
 }
 
 const UserModel = models.user || model<IUser>('User', userSchema)
