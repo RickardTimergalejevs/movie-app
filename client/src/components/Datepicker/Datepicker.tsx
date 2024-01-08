@@ -6,6 +6,7 @@ import {
 } from '../../utils/dateFormatter'
 import { ISession } from '../../interfaces/session'
 import './Datepicker.scss'
+import Button from '../common/Button/Button'
 
 type Props = {
   sessions: ISession[]
@@ -48,14 +49,12 @@ const Datepicker: React.FC<Props> = ({
           {dates.map((date) => (
             <div className="date" key={date}>
               <p className="session-date__type">{formatDayOfWeek(date)}</p>
-              <button
-                className={`session-date__btn ${
-                  date === selectedDate ? 'session-date__btn--selected' : ''
-                }`}
+              <Button
+                children={formatToDay(date)}
+                color="dark"
+                selected={date === selectedDate}
                 onClick={() => handleDateClick(date)}
-              >
-                {formatToDay(date)}
-              </button>
+              />
             </div>
           ))}
         </div>
@@ -68,16 +67,12 @@ const Datepicker: React.FC<Props> = ({
           {sessions?.map((session) => (
             <div className="time" key={session._id}>
               <p className="session-time__type">{session.displayType}</p>
-              <button
-                className={`session-time__btn ${
-                  session === selectedSession
-                    ? 'session-time__btn--selected'
-                    : ''
-                }`}
+              <Button
+                children={session.showTime}
+                color="dark"
+                selected={session === selectedSession}
                 onClick={() => handleSessionClick(session)}
-              >
-                {session.showTime}
-              </button>
+              />
             </div>
           ))}
         </div>

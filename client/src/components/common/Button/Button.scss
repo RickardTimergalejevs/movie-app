@@ -1,0 +1,65 @@
+@import '../../../../styles/variables';
+
+.btn {
+  padding: 0.2rem 0.4rem;
+  background-color: $dark;
+  font-family: $DM-Sans;
+  font-weight: $medium;
+  color: $light;
+  border: none;
+  cursor: pointer;
+
+  &--light {
+    background-color: $light;
+    color: $dark;
+
+    &:hover {
+      background-color: $dark;
+      color: $light;
+    }
+  }
+
+  &--dark {
+    background-color: $dark;
+    color: $light;
+
+    &:hover {
+      background-color: $light;
+      color: $dark;
+    }
+  }
+
+  &--dark-extra-light {
+    background-color: $dark-extra-light;
+    color: $light;
+
+    &:hover {
+      background-color: $light;
+      color: $dark;
+    }
+  }
+
+  &--selected {
+    background-color: $light;
+    color: $dark;
+  }
+
+  &--small {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &--medium {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &--large {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &--rounded {
+    border-radius: 50%;
+  }
+}

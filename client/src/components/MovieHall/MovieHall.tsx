@@ -2,6 +2,7 @@ import Seat from '../Seat/Seat'
 import { ISession } from '../../interfaces/session'
 import './MovieHall.scss'
 import { useState } from 'react'
+import Button from '../common/Button/Button'
 
 type Props = {
   selectedSession: ISession
@@ -166,15 +167,23 @@ const MovieHall = ({ selectedSession }: Props) => {
         </div>
       </div>
       <div className="session-seats-count">
-        <button className="session-seats-count__btn" onClick={handleDecrement}>
-          -
-        </button>
+        <Button
+          children="-"
+          color="dark-extra-light"
+          onClick={handleDecrement}
+          size="large"
+          border="rounded"
+        />
         <p className="session-seats-count__selected">
           Tickets: {selectedSeatCount}
         </p>
-        <button className="session-seats-count__btn" onClick={handleIncrement}>
-          +
-        </button>
+        <Button
+          children="+"
+          color="dark-extra-light"
+          onClick={handleIncrement}
+          size="large"
+          border="rounded"
+        />
       </div>
     </div>
   )

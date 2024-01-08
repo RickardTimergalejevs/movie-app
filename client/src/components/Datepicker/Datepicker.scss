@@ -37,26 +37,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .session-date__btn {
-          padding: 0.2rem 0.4rem;
-          background-color: $dark;
-          font-family: $DM-Sans;
-          font-weight: $medium;
-          color: $light;
-          border: none;
-          cursor: pointer;
-
-          &--selected {
-            background-color: $light;
-            color: $dark;
-          }
-
-          &:hover {
-            background-color: $light;
-            color: $dark;
-          }
-        }
       }
     }
   }
@@ -89,26 +69,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .session-time__btn {
-          padding: 0.2rem 0.4rem;
-          background-color: $dark;
-          font-family: $DM-Sans;
-          font-weight: $medium;
-          color: $light;
-          border: none;
-          cursor: pointer;
-
-          &--selected {
-            background-color: $light;
-            color: $dark;
-          }
-
-          &:hover {
-            background-color: $light;
-            color: $dark;
-          }
-        }
       }
     }
   }
