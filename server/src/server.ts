@@ -6,6 +6,7 @@ import sessionRouter from './routes/session.router'
 import { hallSchema } from './models/hall.model'
 import { sessionSchema } from './models/session.model'
 import hallRouter from './routes/hall.router'
+import userRouter from './routes/user.router'
 
 mongoose.model('Hall', hallSchema)
 mongoose.model('Session', sessionSchema)
@@ -20,6 +21,7 @@ app.use(cors())
 //Routes
 app.use('/api', sessionRouter)
 app.use('/api', hallRouter)
+app.use('/api', userRouter)
 
 //Init server and connect to DB
 const initApp = () => {
