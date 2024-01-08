@@ -7,6 +7,7 @@ export interface IUser {
   email: string
   password: string
   location: string
+  isAdmin: boolean
   comparePassword: (
     password: string,
     callback: (error: Error | null, isMatch?: boolean) => void,
@@ -16,9 +17,10 @@ export interface IUser {
 const userSchema = new Schema<IUser>({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   location: { type: String, required: true },
+  isAdmin: { type: Boolean, default: false },
 })
 
 userSchema.pre('save', function (next) {
