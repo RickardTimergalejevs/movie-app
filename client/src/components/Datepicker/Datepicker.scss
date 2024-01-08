@@ -1,0 +1,75 @@
+@import '../../../styles/variables';
+
+.session-datepicker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: $medium;
+  margin-bottom: 3rem;
+
+  .session-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 20rem;
+
+    &__title-container {
+      display: flex;
+      justify-content: start;
+      border-bottom: 2px solid $light;
+
+      .session-date__title {
+        background-color: $light;
+        color: $dark;
+        padding: 0.2rem 0.4rem;
+      }
+    }
+
+    &__dates {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  .session-time {
+    display: flex;
+    flex-direction: column;
+    min-width: 20rem;
+
+    &__title-container {
+      display: flex;
+      justify-content: end;
+      border-bottom: 2px solid $light;
+
+      .session-time__title {
+        background-color: $light;
+        color: $dark;
+        padding: 0.2rem 0.4rem;
+      }
+    }
+
+    &__time {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .time {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}

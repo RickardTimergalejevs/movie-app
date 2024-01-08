@@ -1,0 +1,57 @@
+@import '../../../styles/variables';
+
+.session-seat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  &__top,
+  &__bottom {
+    height: 1rem;
+    width: 1.3rem;
+    border-radius: 4px;
+    background-color: $dark-extra-light;
+
+    &--session {
+      background-color: $dark-extra-light;
+      cursor: pointer;
+    }
+
+    &--selected {
+      background-color: $green;
+    }
+
+    &--available {
+      background-color: $dark-extra-light;
+    }
+
+    &--taken {
+      background-color: $red;
+    }
+
+    &--booked {
+      background-color: $red;
+      cursor: not-allowed;
+    }
+
+    &--hovered {
+      background-color: $dark;
+    }
+
+    &--hovered-error {
+      background-color: $red;
+      cursor: not-allowed;
+    }
+  }
+
+  &__bottom {
+    height: 0.2rem;
+  }
+
+  //   &:hover {
+  //     .session-seat__top--default,
+  //     .session-seat__bottom--default {
+  //       background-color: $dark;
+  //     }
+  //   }
+}

@@ -1,0 +1,58 @@
+@import '../../../styles/variables';
+
+.session-details {
+  display: flex;
+  flex-direction: column;
+
+  .session-screen {
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid $light;
+    border-radius: 50% 50% 0 0;
+    height: 4rem;
+
+    &__title {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .session-row-list {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+
+    .session-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0 4rem;
+
+      .session-seat-list {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  .session-seats-info {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+
+    .session-seat__selected,
+    .session-seat__available,
+    .session-seat__taken {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  .session-seats-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+}

@@ -2,6 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import sessionRouter from './routes/session.router'
+import { hallSchema } from './models/hall.model'
+import { sessionSchema } from './models/session.model'
+import hallRouter from './routes/hall.router'
+
+mongoose.model('Hall', hallSchema)
+mongoose.model('Session', sessionSchema)
 
 dotenv.config()
 const app = express()
@@ -9,6 +16,10 @@ const app = express()
 //Middlewares
 app.use(express.json())
 app.use(cors())
+
+//Routes
+app.use('/api', sessionRouter)
+app.use('/api', hallRouter)
 
 //Init server and connect to DB
 const initApp = () => {
