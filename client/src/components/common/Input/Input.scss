@@ -17,3 +17,10 @@ input {
     font-style: italic;
   }
 }
+
+.error-message {
+  display: flex;
+  justify-content: start;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.4rem 0;
+}

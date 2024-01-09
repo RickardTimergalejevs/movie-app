@@ -9,12 +9,12 @@ const Input: React.FC<FieldProps> = ({
   const error = errors[field.name] as string | undefined
 
   return (
-    <>
+    <div>
       <input {...field} {...props} />
       {touched[field.name] && errors[field.name] && (
-        <div className="error">{error}</div>
+        <p className="error-message">{error}</p>
       )}
-    </>
+    </div>
   )
 }
 
