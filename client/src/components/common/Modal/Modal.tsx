@@ -2,7 +2,7 @@ import React from 'react'
 import './Modal.scss'
 
 type Props = {
-  children: JSX.Element[]
+  children: JSX.Element
   onClose?: () => void
 }
 

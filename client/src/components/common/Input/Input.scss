@@ -8,6 +8,7 @@
   font-family: $DM-Sans;
 
   &:focus {
+    border-left: 2px solid $light;
     outline: none;
   }
 
