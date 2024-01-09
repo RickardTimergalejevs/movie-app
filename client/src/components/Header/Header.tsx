@@ -19,7 +19,9 @@ const Header = () => {
         </p>
       </nav>
       <div className="header__login">
-        <p className="header__text">Login</p>
+        <p className="header__text">
+          <Link to="/login">Login</Link>
+        </p>
       </div>
     </header>
   )

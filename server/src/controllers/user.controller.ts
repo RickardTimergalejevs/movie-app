@@ -1,6 +1,10 @@
 import { Request, Response } from 'express'
 import UserModel from '../models/user.model'
 
+interface AuthenticatedRequest extends Request {
+  user?: any // Adjust the type according to your user object structure
+}
+
 const registerUser = async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, email, password, location } = req.body
@@ -62,4 +66,17 @@ const loginUser = async (req: Request, res: Response) => {
   }
 }
 
-export { registerUser, loginUser }
+const logoutUser = async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ message: 'You logged out successfully.' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Could not logout' })
+  }
+}
+
+const currentUser = async (req: AuthenticatedRequest, res: Response) => {
+  res.json(req.user)
+}
+
+export { registerUser, loginUser, logoutUser, currentUser }

@@ -12,6 +12,7 @@ import Profile from './pages/Profile/Profile.tsx'
 import App from './App.tsx'
 import { store } from './redux/store.ts'
 import MovieDetails from './pages/MovieDetails/MovieDetails.tsx'
+import Login from './pages/Login/Login.tsx'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },
