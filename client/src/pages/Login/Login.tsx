@@ -1,15 +1,14 @@
-import React from 'react'
 import './Login.scss'
 import Modal from '../../components/common/Modal/Modal'
+import Input from '../../components/common/Input/Input'
 
-type Props = {}
-
-const Login = (props: Props) => {
+const Login = () => {
   return (
     <div className="login__page">
       <Modal>
         <h1>Login</h1>
-        <h2>e</h2>
+        <Input placeholder="E-mail" />
+        <Input placeholder="Password" />
       </Modal>
     </div>
   )
