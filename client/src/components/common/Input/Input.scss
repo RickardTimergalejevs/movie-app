@@ -6,6 +6,7 @@ input {
   border: none;
   color: $light;
   font-family: $DM-Sans;
+  width: 100%;
 
   &:focus {
     border-left: 2px solid $light;
