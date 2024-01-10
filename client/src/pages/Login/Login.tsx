@@ -4,6 +4,7 @@ import Input from '../../components/common/Input/Input'
 import { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
+import { useRegisterMutation } from '../../redux/services/auth'
 
 interface ILoginValues {
   email: string
@@ -15,7 +16,7 @@ interface IRegisterValues {
   lastName: string
   email: string
   password: string
-  city: string
+  location: string
 }
 
 const loginSchema = Yup.object().shape({
@@ -32,14 +33,26 @@ const registerSchema = Yup.object().shape({
     .email('Email must be a valid ')
     .required('Email is required'),
   password: Yup.string().required('Password is required'),
-  city: Yup.string().required('City is required'),
+  location: Yup.string().required('City is required'),
 })
 
 const Login = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false)
 
+  const [register] = useRegisterMutation()
+
   const handleChangeForm = () => {
     setIsRegisterForm(!isRegisterForm)
+  }
+
+  const handleRegister = async (values: IRegisterValues) => {
+    try {
+      const data = await register(values).unwrap()
+
+      console.log(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const initialValuesLogin: ILoginValues = { email: '', password: '' }
@@ -48,7 +61,7 @@ const Login = () => {
     lastName: '',
     email: '',
     password: '',
-    city: '',
+    location: '',
   }
 
   return (
@@ -94,6 +107,7 @@ const Login = () => {
               initialValues={initialValuesRegister}
               validationSchema={registerSchema}
               onSubmit={(values, actions) => {
+                handleRegister(values)
                 console.log({ values, actions })
                 actions.setSubmitting(false)
               }}
@@ -128,8 +142,8 @@ const Login = () => {
                   component={Input}
                 />
                 <Field
-                  id="city"
-                  name="city"
+                  id="location"
+                  name="location"
                   placeholder="City"
                   type="text"
                   component={Input}

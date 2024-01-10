@@ -19,18 +19,26 @@ export interface ILoginRequest {
   password: string
 }
 
+interface IRegisterRequest {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  location: string
+}
+
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://localhost:3000/users/',
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`)
-      }
-      return headers
-    },
+    baseUrl: 'http://localhost:3000/api/users/',
   }),
   endpoints: (builder) => ({
+    register: builder.mutation<IUser, IRegisterRequest>({
+      query: (credentials) => ({
+        url: 'register',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
     login: builder.mutation<IUserResponse, ILoginRequest>({
       query: (credentials) => ({
         url: 'login',
@@ -38,10 +46,7 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
-    protected: builder.mutation<{ message: string }, void>({
-      query: () => 'protected',
-    }),
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation } = authApi
+export const { useLoginMutation, useRegisterMutation } = authApi
