@@ -4,7 +4,11 @@ import Input from '../../components/common/Input/Input'
 import { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
-import { useRegisterMutation } from '../../redux/services/auth'
+import {
+  useLoginMutation,
+  useRegisterMutation,
+} from '../../redux/services/auth'
+import { useNavigate } from 'react-router-dom'
 
 interface ILoginValues {
   email: string
@@ -38,8 +42,10 @@ const registerSchema = Yup.object().shape({
 
 const Login = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false)
+  const navigate = useNavigate()
 
-  const [register] = useRegisterMutation()
+  const [register, { isSuccess }] = useRegisterMutation()
+  const [login] = useLoginMutation()
 
   const handleChangeForm = () => {
     setIsRegisterForm(!isRegisterForm)
@@ -50,6 +56,24 @@ const Login = () => {
       const data = await register(values).unwrap()
 
       console.log(data)
+
+      if (data) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleLogin = async (values: ILoginValues) => {
+    try {
+      const data = await login(values).unwrap()
+
+      console.log(data)
+
+      if (data) {
+        navigate('/')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -77,6 +101,7 @@ const Login = () => {
               initialValues={initialValuesLogin}
               validationSchema={loginSchema}
               onSubmit={(values, actions) => {
+                handleLogin(values)
                 console.log({ values, actions })
                 actions.setSubmitting(false)
               }}

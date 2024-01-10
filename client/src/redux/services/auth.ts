@@ -7,6 +7,7 @@ interface IUser {
   email: string
   password: string
   location: string
+  isAdmin: boolean
 }
 
 export interface IUserResponse {
@@ -27,24 +28,28 @@ interface IRegisterRequest {
   location: string
 }
 
+const API_URL = 'http://localhost:3000/api/' // to env
+
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000/api/users/',
   }),
+  tagTypes: ['User'],
   endpoints: (builder) => ({
     register: builder.mutation<IUser, IRegisterRequest>({
-      query: (credentials) => ({
+      query: (user) => ({
         url: 'register',
         method: 'POST',
-        body: credentials,
+        body: user,
       }),
     }),
     login: builder.mutation<IUserResponse, ILoginRequest>({
-      query: (credentials) => ({
+      query: (user) => ({
         url: 'login',
         method: 'POST',
-        body: credentials,
+        body: user,
       }),
+      invalidatesTags: ['User'],
     }),
   }),
 })
