@@ -12,6 +12,9 @@ import Profile from './pages/Profile/Profile.tsx'
 import App from './App.tsx'
 import { store } from './redux/store.ts'
 import MovieDetails from './pages/MovieDetails/MovieDetails.tsx'
+import Login from './pages/Login/Login.tsx'
+import Authorization from './redux/features/auth/Authorization.tsx'
+import ProtectedRoutes from './routes/ProtectedRoutes.tsx'
 
 const router = createBrowserRouter([
   {
@@ -34,8 +37,17 @@ const router = createBrowserRouter([
         element: <Upcoming />,
       },
       {
-        path: '/profile',
-        element: <Profile />,
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: '/profile',
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },
@@ -44,7 +56,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Authorization>
+        <RouterProvider router={router} />
+      </Authorization>
     </Provider>
   </React.StrictMode>,
 )

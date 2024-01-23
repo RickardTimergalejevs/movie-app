@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux'
 import './Header.scss'
 import { Link } from 'react-router-dom'
+import { selectIsAuthenticated } from '../../redux/features/auth/authSlice'
 
 const Header = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated)
+
   return (
     <header>
       <div className="header__logo">
@@ -19,7 +23,15 @@ const Header = () => {
         </p>
       </nav>
       <div className="header__login">
-        <p className="header__text">Login</p>
+        {isAuthenticated ? (
+          <p className="header__text">
+            <Link to="/profile">Profile</Link>
+          </p>
+        ) : (
+          <p className="header__text">
+            <Link to="/login">Login</Link>
+          </p>
+        )}
       </div>
     </header>
   )
