@@ -28,11 +28,29 @@ interface IRegisterRequest {
   location: string
 }
 
+interface ICurrentUserRequest {
+  _id: string
+  firstName: string
+  lastName: string
+  email: string
+  location: string
+  isAdmin: boolean
+  password: string
+}
+
 const API_URL = 'http://localhost:3000/api/' // to env
 
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000/api/users/',
+    prepareHeaders(headers, { getState }) {
+      const token =
+        (getState() as RootState).auth.token || localStorage.getItem('token')
+
+      if (token && token !== null) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+    },
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
@@ -51,7 +69,14 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    current: builder.query<ICurrentUserRequest, void>({
+      query: () => ({
+        url: 'current',
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useRegisterMutation } = authApi
+export const { useLoginMutation, useRegisterMutation, useCurrentQuery } =
+  authApi

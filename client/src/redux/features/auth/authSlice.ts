@@ -38,6 +38,12 @@ const slice = createSlice({
         state.token = action.payload.token
       },
     )
+    builder.addMatcher(
+      authApi.endpoints.current.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload
+      },
+    )
   },
 })
 

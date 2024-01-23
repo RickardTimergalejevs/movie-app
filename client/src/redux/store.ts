@@ -3,6 +3,7 @@ import { moviesApi } from './services/movies'
 import { sessionsApi } from './services/sessions'
 import { authApi } from './services/auth'
 import auth from './features/auth/authSlice'
+import { listenerMiddleware } from './middleware/auth'
 
 export const store = configureStore({
   reducer: {
@@ -13,11 +14,9 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      moviesApi.middleware,
-      sessionsApi.middleware,
-      authApi.middleware,
-    ),
+    getDefaultMiddleware()
+      .concat(moviesApi.middleware, sessionsApi.middleware, authApi.middleware)
+      .prepend(listenerMiddleware.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
