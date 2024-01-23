@@ -14,21 +14,20 @@ interface IUser {
 interface InitialState {
   user: IUser | null
   token: string | null
+  isAuthenticated: boolean
 }
 
 const initialState: InitialState = {
   user: null,
   token: null,
+  isAuthenticated: false,
 }
 
 const slice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
-    logout: (state, action) => {
-      state.user = null
-      state.token = null
-    },
+    logout: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -36,12 +35,14 @@ const slice = createSlice({
       (state, action) => {
         state.user = action.payload.user
         state.token = action.payload.token
+        state.isAuthenticated = true
       },
     )
     builder.addMatcher(
       authApi.endpoints.current.matchFulfilled,
       (state, action) => {
         state.user = action.payload
+        state.isAuthenticated = true
       },
     )
   },
@@ -53,3 +54,5 @@ export default slice.reducer
 
 export const selectCurrentUser = (state: RootState) => state.auth.user
 export const selectCurrentToken = (state: RootState) => state.auth.token
+export const selectIsAuthenticated = (state: RootState) =>
+  state.auth.isAuthenticated
