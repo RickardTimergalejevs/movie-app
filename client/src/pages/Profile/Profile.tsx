@@ -1,8 +1,16 @@
 import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '../../redux/features/auth/authSlice'
+import { logout, selectCurrentUser } from '../../redux/features/auth/authSlice'
+import NavButton from '../../components/common/NavButton/NavButton'
+import { useDispatch } from 'react-redux'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    localStorage.removeItem('token')
+  }
 
   return (
     <div>
@@ -10,6 +18,7 @@ const Profile = () => {
         <hr />
         <h1 className="profile__page-title">Profile</h1>
       </div>
+      <NavButton children="Logout" onClick={handleLogout} />
       {user && (
         <div>
           <h1>{`${user.firstName} ${user.lastName}`}</h1>
