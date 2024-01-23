@@ -1,6 +1,6 @@
 import { useCurrentQuery } from '../../services/auth'
 
-const Auth = ({ children }: { children: JSX.Element }) => {
+const Authorization = ({ children }: { children: JSX.Element }) => {
   const { isLoading } = useCurrentQuery()
 
   if (isLoading) {
@@ -10,4 +10,4 @@ const Auth = ({ children }: { children: JSX.Element }) => {
   return children
 }
 
-export default Auth
+export default Authorization
