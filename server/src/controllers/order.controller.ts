@@ -6,7 +6,7 @@ const createOrder = async (req: Request, res: Response) => {
   try {
     const sessionId = '65b1426e098a16dae11d63d4'
     const userId = '65afa4946ddf6027d921ae33'
-    const selectedSeats = ['C1', 'C2']
+    const selectedSeats = ['D1', 'D2']
     const totalSelectedSeats = 1
     const totalPrice = 199
 
@@ -22,14 +22,10 @@ const createOrder = async (req: Request, res: Response) => {
 
     const session = await SessionModel.findById(sessionId)
 
-    // Обновление статуса сидений
     if (!session || !session.hall || !session.hall.rows) {
       console.error('Invalid session data')
       return
     }
-
-    // Получите халл сессии
-    console.log(session)
 
     session.hall.rows.forEach((row: any) => {
       row.seats.forEach((seat: any) => {

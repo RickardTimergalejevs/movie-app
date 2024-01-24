@@ -37,7 +37,7 @@ const rowSchema = new Schema<IRow>({
 })
 
 const hallSchema = new Schema<IHall>({
-  name: { type: String, required: true },
+  name: { type: String, default: 'Stockholm Hall Basic', required: true },
   capacity: { type: Number, required: true },
   rows: [rowSchema],
 })
