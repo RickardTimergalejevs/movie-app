@@ -3,13 +3,20 @@ import { ISession } from '../../interfaces/session'
 import './MovieHall.scss'
 import { useState } from 'react'
 import Button from '../common/Button/Button'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import {
+  selectSeats,
+  setSelectedSeats,
+} from '../../redux/features/order/orderSlice'
 
 type Props = {
   selectedSession: ISession
 }
 
 const MovieHall = ({ selectedSession }: Props) => {
-  const [selectedSeats, setSelectedSeats] = useState<string[]>([])
+  const dispatch = useDispatch()
+  const selectedSeats = useSelector(selectSeats)
   const [selectedSeatCount, setSelectedSeatCount] = useState<number>(1)
   const [hoveredSeats, setHoveredSeats] = useState<{
     status: string
@@ -58,7 +65,7 @@ const MovieHall = ({ selectedSession }: Props) => {
         }
       }
 
-      setSelectedSeats(selectedSeats)
+      dispatch(setSelectedSeats(selectedSeats))
     }
   }
 

@@ -4,6 +4,7 @@ import { sessionsApi } from './services/sessions'
 import { authApi } from './services/auth'
 import auth from './features/auth/authSlice'
 import { listenerMiddleware } from './middleware/auth'
+import orderReducer from './features/order/orderSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     [sessionsApi.reducerPath]: sessionsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     auth,
+    order: orderReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

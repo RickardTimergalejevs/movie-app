@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../../store'
 
 interface InitialState {
   sessionId: string | null
@@ -19,9 +20,15 @@ const initialState: InitialState = {
 const orderSlice = createSlice({
   name: 'order',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setSelectedSeats: (state, action: PayloadAction<string[]>) => {
+      state.selectedSeats = action.payload
+    },
+  },
 })
 
-export const {} = orderSlice.actions
+export const { setSelectedSeats } = orderSlice.actions
 
 export default orderSlice.reducer
+
+export const selectSeats = (state: RootState) => state.order.selectedSeats
