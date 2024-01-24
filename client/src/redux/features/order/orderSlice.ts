@@ -24,6 +24,9 @@ const orderSlice = createSlice({
     setSelectedSessionId: (state, action: PayloadAction<string>) => {
       state.sessionId = action.payload
     },
+    setUserId: (state, action: PayloadAction<string | null>) => {
+      state.userId = action.payload
+    },
     setSelectedSeats: (state, action: PayloadAction<string[]>) => {
       state.selectedSeats = action.payload
       state.totalSelectedSeats = action.payload.length
@@ -31,7 +34,8 @@ const orderSlice = createSlice({
   },
 })
 
-export const { setSelectedSeats, setSelectedSessionId } = orderSlice.actions
+export const { setSelectedSeats, setSelectedSessionId, setUserId } =
+  orderSlice.actions
 
 export default orderSlice.reducer
 

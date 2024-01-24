@@ -3,6 +3,7 @@ import { RootState } from '../../store'
 import { authApi } from '../../services/auth'
 
 interface IUser {
+  _id: string
   firstName: string
   lastName: string
   email: string
