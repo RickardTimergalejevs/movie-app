@@ -6,8 +6,11 @@ import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
 import { ISession } from '../../interfaces/session'
 import NavButton from '../common/NavButton/NavButton'
+import { useDispatch } from 'react-redux'
+import { setSelectedSessionId } from '../../redux/features/order/orderSlice'
 
 const MovieSession = () => {
+  const dispatch = useDispatch()
   const { id } = useParams()
 
   if (!id) {
@@ -29,12 +32,17 @@ const MovieSession = () => {
   const [selectedDate, setSelectedDate] = useState<string>(dates[0])
   const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
 
+  if (selectedSession) {
+    dispatch(setSelectedSessionId(selectedSession._id))
+  }
+
   const {
     data: sessions,
     error,
     isLoading,
   } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
   console.log(sessions)
+  console.log(selectedSession)
 
   return (
     sessions && (
