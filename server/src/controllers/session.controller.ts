@@ -2,6 +2,7 @@ import { IHall } from '../models/hall.model'
 import SessionModel, { ISession } from '../models/session.model'
 import { Request, Response } from 'express'
 import mongoose from 'mongoose'
+import { ITicket } from '../models/ticket.model'
 
 const getAllSessions = async (req: Request, res: Response) => {
   try {
@@ -26,7 +27,8 @@ const getSessionsByMovieIdAndDate = async (req: Request, res: Response) => {
       .sort({ showDate: 1, showTime: 1 })
       .populate<{
         hall: IHall
-      }>('hall')
+        tickets: ITicket[]
+      }>(['hall', 'tickets'])
       .lean()
 
     if (!session) {
@@ -49,8 +51,13 @@ const createSession = async (req: Request, res: Response) => {
       city: 'Stockholm',
       hall: hall,
       showDate: '2024.01.27',
-      showTime: '10:00',
+      showTime: '16:00',
       displayType: '3D',
+      tickets: [
+        new mongoose.Types.ObjectId('65b1126e7ecbe0c351f6387a'),
+        new mongoose.Types.ObjectId('65b112b2ce6d8a3cf69fd1f2'),
+        new mongoose.Types.ObjectId('65b112bd443503645668ec8c'),
+      ],
     }
 
     const createdSession = await SessionModel.create(session)

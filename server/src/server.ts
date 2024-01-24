@@ -8,9 +8,11 @@ import { sessionSchema } from './models/session.model'
 import hallRouter from './routes/hall.router'
 import userRouter from './routes/user.router'
 import ticketRouter from './routes/ticket.router'
+import { ticketSchema } from './models/ticket.model'
 
 mongoose.model('Hall', hallSchema)
 mongoose.model('Session', sessionSchema)
+mongoose.model('Ticket', ticketSchema)
 
 dotenv.config()
 const app = express()

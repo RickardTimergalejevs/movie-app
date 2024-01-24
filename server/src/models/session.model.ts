@@ -7,6 +7,7 @@ export interface ISession {
   showDate: string
   showTime: string
   displayType: '2D' | '3D' | 'IMAX'
+  tickets: Types.ObjectId[]
 }
 
 export const sessionSchema = new Schema<ISession>({
@@ -16,6 +17,7 @@ export const sessionSchema = new Schema<ISession>({
   showDate: { type: String, required: true },
   showTime: { type: String, required: true },
   displayType: { type: String, enum: ['2D', '3D', 'IMAX'], required: true },
+  tickets: [{ type: Schema.Types.ObjectId, ref: 'Ticket', required: true }],
 })
 
 const SessionModel = models.session || model<ISession>('Session', sessionSchema)

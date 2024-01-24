@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose'
 
-interface ITicket {
+export interface ITicket {
   price: number
   type: 'standard' | 'student' | 'pensioner'
 }
