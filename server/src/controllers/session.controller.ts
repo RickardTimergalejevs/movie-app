@@ -45,11 +45,11 @@ const createSession = async (req: Request, res: Response) => {
 
   try {
     const session: ISession = {
-      movieId: '848326',
+      movieId: '787699',
       city: 'Stockholm',
       hall: hall,
-      showDate: '2024.01.07',
-      showTime: '18:00',
+      showDate: '2024.01.27',
+      showTime: '10:00',
       displayType: '3D',
     }
 

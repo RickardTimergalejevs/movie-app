@@ -15,6 +15,7 @@ import MovieDetails from './pages/MovieDetails/MovieDetails.tsx'
 import Login from './pages/Login/Login.tsx'
 import Authorization from './redux/features/auth/Authorization.tsx'
 import ProtectedRoutes from './routes/ProtectedRoutes.tsx'
+import Checkout from './pages/Checkout/Checkout.tsx'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/checkout',
+        element: <Checkout />,
       },
       {
         element: <ProtectedRoutes />,
