@@ -1,5 +1,9 @@
-import { IHall } from '../models/hall.model'
-import SessionModel, { ISession } from '../models/session.model'
+import SessionModel, {
+  IHall,
+  IRow,
+  ISeat,
+  ISession,
+} from '../models/session.model'
 import { Request, Response } from 'express'
 import mongoose from 'mongoose'
 import { ITicket } from '../models/ticket.model'
@@ -29,7 +33,6 @@ const getSessionsByMovieIdAndDate = async (req: Request, res: Response) => {
         hall: IHall
         tickets: ITicket[]
       }>(['hall', 'tickets'])
-      .lean()
 
     if (!session) {
       res.status(404).json({ message: 'Sessions not found for this movieId' })
@@ -42,16 +45,56 @@ const getSessionsByMovieIdAndDate = async (req: Request, res: Response) => {
   }
 }
 
+const createHall = async () => {
+  const rows: IRow[] = []
+  const rowLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
+  for (let i = 0; i < rowLetters.length; i++) {
+    const rowLetter = rowLetters[i]
+    const seats: ISeat[] = []
+    let seatCount = 20
+
+    if (rowLetter === 'G') {
+      seatCount = 18
+    } else if (rowLetter === 'H') {
+      seatCount = 16
+    }
+
+    for (let j = 1; j <= seatCount; j++) {
+      const seat: ISeat = {
+        seat: `${rowLetter}${j}`,
+        isBooked: false,
+      }
+      seats.push(seat)
+    }
+
+    const row: IRow = {
+      row: rowLetter,
+      seats,
+    }
+
+    rows.push(row)
+  }
+
+  const hall: IHall = {
+    name: 'Stockholm Hall Basic',
+    capacity: rows.reduce((total, row) => total + row.seats.length, 0),
+    rows,
+  }
+
+  return hall
+}
+
 const createSession = async (req: Request, res: Response) => {
-  const hall = new mongoose.Types.ObjectId('6595625feb9e39dd29e79748')
+  const createdHall = await createHall()
 
   try {
     const session: ISession = {
       movieId: '787699',
       city: 'Stockholm',
-      hall: hall,
+      hall: createdHall,
       showDate: '2024.01.27',
-      showTime: '16:00',
+      showTime: '20:00',
       displayType: '3D',
       tickets: [
         new mongoose.Types.ObjectId('65b1126e7ecbe0c351f6387a'),

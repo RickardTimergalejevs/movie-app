@@ -3,15 +3,12 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import sessionRouter from './routes/session.router'
-import { hallSchema } from './models/hall.model'
 import { sessionSchema } from './models/session.model'
-import hallRouter from './routes/hall.router'
 import userRouter from './routes/user.router'
 import ticketRouter from './routes/ticket.router'
 import { ticketSchema } from './models/ticket.model'
 import orderRouter from './routes/order.router'
 
-mongoose.model('Hall', hallSchema)
 mongoose.model('Session', sessionSchema)
 mongoose.model('Ticket', ticketSchema)
 
@@ -24,7 +21,6 @@ app.use(cors())
 
 //Routes
 app.use('/api', sessionRouter)
-app.use('/api', hallRouter)
 app.use('/api', userRouter)
 app.use('/api', ticketRouter)
 app.use('/api', orderRouter)

@@ -36,3 +36,5 @@ POST http://localhost:3000/api/users/logout
 GET http://localhost:3000/api/users/current
 ###
 POST http://localhost:3000/api/tickets
+###
+POST http://localhost:3000/api/orders
