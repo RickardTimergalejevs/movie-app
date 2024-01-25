@@ -5,7 +5,6 @@ import './MovieSession.scss'
 import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
 import { ISession } from '../../interfaces/session'
-import NavButton from '../common/NavButton/NavButton'
 import { useDispatch } from 'react-redux'
 import { setSelectedSessionId } from '../../redux/features/order/orderSlice'
 
@@ -55,15 +54,7 @@ const MovieSession = () => {
           selectedSession={selectedSession}
           setSelectedSession={setSelectedSession}
         />
-        {selectedSession && (
-          <>
-            <MovieHall selectedSession={selectedSession} />
-            <div className="session-purchase">
-              <p className="session-purchase__total">Total: 0 kr</p>
-              <NavButton children="Checkout" color="green" link="/checkout" />
-            </div>
-          </>
-        )}
+        {selectedSession && <MovieHall selectedSession={selectedSession} />}
       </div>
     )
   )

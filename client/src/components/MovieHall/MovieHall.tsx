@@ -8,7 +8,9 @@ import { useSelector } from 'react-redux'
 import {
   selectSeats,
   setSelectedSeats,
+  setTotalPrice,
 } from '../../redux/features/order/orderSlice'
+import NavButton from '../common/NavButton/NavButton'
 
 type Props = {
   selectedSession: ISession
@@ -25,6 +27,23 @@ const MovieHall = ({ selectedSession }: Props) => {
     status: 'visible',
     seats: [],
   })
+
+  console.log(selectedSession)
+
+  let totalPrice = 0
+
+  if (selectedSession) {
+    const standardTickets = selectedSession.tickets.filter(
+      (ticket) => ticket.type === 'standard',
+    )
+    const totalStandardPrice = standardTickets.reduce(
+      (acc, ticket) => acc + ticket.price,
+      0,
+    )
+
+    totalPrice = totalStandardPrice * selectedSeats.length
+    dispatch(setTotalPrice(totalPrice))
+  }
 
   console.log('selectedSeats', selectedSeats)
   console.log('hoveredSeats', hoveredSeats)
@@ -191,6 +210,10 @@ const MovieHall = ({ selectedSession }: Props) => {
           size="large"
           border="rounded"
         />
+      </div>
+      <div className="session-purchase">
+        <p className="session-purchase__total">{`Total: ${totalPrice} kr`}</p>
+        <NavButton children="Checkout" color="green" link="/checkout" />
       </div>
     </div>
   )

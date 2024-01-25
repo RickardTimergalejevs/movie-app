@@ -25,6 +25,13 @@ interface ISessionListResponse {
     capacity: number
     rows: IRow[]
   }
+  tickets: [
+    {
+      _id: string
+      price: number
+      type: string
+    },
+  ]
 }
 
 export const sessionsApi = createApi({
