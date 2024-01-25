@@ -12,6 +12,7 @@ import {
 import NavButton from '../../components/common/NavButton/NavButton'
 import { useNavigate } from 'react-router-dom'
 import { useGetMovieQuery } from '../../redux/services/movies'
+import './Checkout.scss'
 
 const Checkout = () => {
   const dispatch = useDispatch()
@@ -32,34 +33,52 @@ const Checkout = () => {
   }, [user, dispatch])
 
   return (
-    <div>
-      <div></div>
-      <NavButton children="Back" onClick={() => navigate(-1)} />
+    <div className="checkout__page">
+      <div className="checkout-nav">
+        <hr />
+        <h1 className="checkout-nav__title">Checkout</h1>
+      </div>
+      <div className="checkout-back-btn">
+        <NavButton children="Back" onClick={() => navigate(-1)} />
+      </div>
       {session && movie && (
-        <div>
-          <div>
+        <div className="checkout-session-card">
+          <div className="checkout-movie-details">
             <img
+              className="checkout-movie-details__img"
               src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               alt={movie.title}
             />
-            <h1>{movie.title}</h1>
+            <h2 className="checkout-movie-details__title">{movie.title}</h2>
           </div>
-          <div>
-            <p>Date: {session.showDate}</p>
-            <p>Time: {session.showTime}</p>
-            <p>Tickets: {tickets}</p>
-            <div>
-              <p>Seats: </p>
+          <div className="checkout-session-details">
+            <p className="checkout-session-details__field">
+              <span>Date:</span> {session.showDate}
+            </p>
+            <p className="checkout-session-details__field">
+              <span>Time:</span> {session.showTime}
+            </p>
+            <p className="checkout-session-details__field">
+              <span>Type:</span> {session.displayType}
+            </p>
+            <p className="checkout-session-details__field">
+              <span>Tickets:</span> {tickets}
+            </p>
+            <div className="checkout-session-details__field checkout-session-details__seats">
               <p>
-                {seats.map((seat, index) => (
-                  <p key={index}>{seat}</p>
-                ))}
+                <span>Seats:</span>{' '}
               </p>
+              <p>{seats.join(', ')}</p>
             </div>
-            <p>Total Price: {totalPrice}</p>
+            <p className="checkout-session-details__field">
+              <span>Total Price:</span> {totalPrice} kr
+            </p>
           </div>
         </div>
       )}
+      <div>
+        <NavButton children="Buy" color="green" />
+      </div>
     </div>
   )
 }
