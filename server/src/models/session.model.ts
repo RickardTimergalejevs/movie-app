@@ -17,7 +17,7 @@ export interface IHall {
 }
 
 export interface ISession {
-  movieId: string
+  movieId: number
   city: string
   hall: IHall
   showDate: string
@@ -43,7 +43,7 @@ const hallSchema = new Schema<IHall>({
 })
 
 export const sessionSchema = new Schema<ISession>({
-  movieId: { type: String, required: true },
+  movieId: { type: Number, required: true },
   city: { type: String, required: true },
   hall: hallSchema,
   showDate: { type: String, required: true },

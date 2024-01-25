@@ -43,6 +43,8 @@ export const { setSelectedSeats, setSession, setUserId, setTotalPrice } =
 
 export default orderSlice.reducer
 
+export const selectSession = (state: RootState) => state.order.session
 export const selectSeats = (state: RootState) => state.order.selectedSeats
 export const selectTotalSelectedSeats = (state: RootState) =>
   state.order.totalSelectedSeats
+export const selectTotalPrice = (state: RootState) => state.order.totalPrice

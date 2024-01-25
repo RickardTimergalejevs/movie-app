@@ -18,7 +18,7 @@ export interface ITicket {
 
 export interface ISession {
   _id: string
-  movieId: string
+  movieId: number
   city: string
   showDate: string
   showTime: string

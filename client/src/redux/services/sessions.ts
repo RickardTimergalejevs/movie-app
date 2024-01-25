@@ -14,7 +14,7 @@ interface IRow {
 
 interface ISessionListResponse {
   _id: string
-  movieId: string
+  movieId: number
   city: string
   showDate: string
   showTime: string
