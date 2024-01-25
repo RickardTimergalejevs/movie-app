@@ -6,7 +6,7 @@ import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
 import { ISession } from '../../interfaces/session'
 import { useDispatch } from 'react-redux'
-import { setSelectedSessionId } from '../../redux/features/order/orderSlice'
+import { setSession } from '../../redux/features/order/orderSlice'
 
 const MovieSession = () => {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ const MovieSession = () => {
   const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
 
   if (selectedSession) {
-    dispatch(setSelectedSessionId(selectedSession._id))
+    dispatch(setSession(selectedSession))
   }
 
   const {

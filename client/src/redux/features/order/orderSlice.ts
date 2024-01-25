@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
+import { ISession } from '../../../interfaces/session'
 
 interface InitialState {
-  sessionId: string | null
+  session: ISession | null
   userId: string | null
   selectedSeats: string[] | []
   totalSelectedSeats: number
@@ -10,7 +11,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  sessionId: null,
+  session: null,
   userId: null,
   selectedSeats: [],
   totalSelectedSeats: 0,
@@ -21,8 +22,8 @@ const orderSlice = createSlice({
   name: 'order',
   initialState: initialState,
   reducers: {
-    setSelectedSessionId: (state, action: PayloadAction<string>) => {
-      state.sessionId = action.payload
+    setSession: (state, action: PayloadAction<ISession>) => {
+      state.session = action.payload
     },
     setUserId: (state, action: PayloadAction<string | null>) => {
       state.userId = action.payload
@@ -37,12 +38,8 @@ const orderSlice = createSlice({
   },
 })
 
-export const {
-  setSelectedSeats,
-  setSelectedSessionId,
-  setUserId,
-  setTotalPrice,
-} = orderSlice.actions
+export const { setSelectedSeats, setSession, setUserId, setTotalPrice } =
+  orderSlice.actions
 
 export default orderSlice.reducer
 
