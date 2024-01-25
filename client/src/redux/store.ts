@@ -5,19 +5,26 @@ import { authApi } from './services/auth'
 import auth from './features/auth/authSlice'
 import { listenerMiddleware } from './middleware/auth'
 import orderReducer from './features/order/orderSlice'
+import { ordersApi } from './services/order'
 
 export const store = configureStore({
   reducer: {
     [moviesApi.reducerPath]: moviesApi.reducer,
     [sessionsApi.reducerPath]: sessionsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [ordersApi.reducerPath]: ordersApi.reducer,
     auth,
     order: orderReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(moviesApi.middleware, sessionsApi.middleware, authApi.middleware)
+      .concat(
+        moviesApi.middleware,
+        sessionsApi.middleware,
+        authApi.middleware,
+        ordersApi.middleware,
+      )
       .prepend(listenerMiddleware.middleware),
 })
 
