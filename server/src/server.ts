@@ -8,6 +8,7 @@ import userRouter from './routes/user.router'
 import ticketRouter from './routes/ticket.router'
 import { ticketSchema } from './models/ticket.model'
 import orderRouter from './routes/order.router'
+import checkoutRouter from './routes/checkout.router'
 
 mongoose.model('Session', sessionSchema)
 mongoose.model('Ticket', ticketSchema)
@@ -24,6 +25,7 @@ app.use('/api', sessionRouter)
 app.use('/api', userRouter)
 app.use('/api', ticketRouter)
 app.use('/api', orderRouter)
+app.use('/api', checkoutRouter)
 
 //Init server and connect to DB
 const initApp = () => {

@@ -13,6 +13,15 @@ import NavButton from '../../components/common/NavButton/NavButton'
 import { useNavigate } from 'react-router-dom'
 import { useGetMovieQuery } from '../../redux/services/movies'
 import './Checkout.scss'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+
+import PaymentForm from '../../components/CheckoutForm/PaymentForm'
+import { useCreatePaymentIntentMutation } from '../../redux/services/checkout'
+
+const stripePromise = loadStripe(
+  'pk_test_51No0MbDTXgg9R4l79HoWqQ6c04s4MwafTWwjHTXldXwUyczHZtlPtKFXQ1ExepQXmFeKJGRYQxUkgNajHuTAQObq007UAB1v44',
+)
 
 const Checkout = () => {
   const dispatch = useDispatch()
@@ -24,7 +33,37 @@ const Checkout = () => {
   const tickets = useSelector(selectTotalSelectedSeats)
   const totalPrice = useSelector(selectTotalPrice)
 
-  const { data: movie, isLoading, isError } = useGetMovieQuery(session?.movieId)
+  const {
+    data: movie,
+    isLoading,
+    isError,
+  } = useGetMovieQuery(session?.movieId ?? 0)
+
+  const [createPaymentIntent, { data }] = useCreatePaymentIntentMutation()
+
+  console.log(totalPrice)
+
+  const handlePaymentIntent = async () => {
+    try {
+      const amountInOre = totalPrice * 100
+
+      const data = await createPaymentIntent(amountInOre)
+
+      const clientSecret = data
+
+      console.log(clientSecret)
+      console.log(amountInOre)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: data?.clientSecret || '',
+  }
+
+  console.log(options)
 
   useEffect(() => {
     if (user && user._id) {
@@ -76,6 +115,12 @@ const Checkout = () => {
           </div>
         </div>
       )}
+      {options && options.clientSecret && (
+        <Elements stripe={stripePromise} options={options}>
+          <PaymentForm />
+        </Elements>
+      )}
+      <button onClick={handlePaymentIntent}>Intent</button>
       <div>
         <NavButton children="Buy" color="green" />
       </div>
