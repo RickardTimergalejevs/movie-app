@@ -18,6 +18,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 import PaymentForm from '../../components/CheckoutForm/PaymentForm'
 import { useCreatePaymentIntentMutation } from '../../redux/services/checkout'
+import { useCreateOrderMutation } from '../../redux/services/order'
 
 const stripePromise = loadStripe(
   'pk_test_51No0MbDTXgg9R4l79HoWqQ6c04s4MwafTWwjHTXldXwUyczHZtlPtKFXQ1ExepQXmFeKJGRYQxUkgNajHuTAQObq007UAB1v44',
@@ -40,8 +41,31 @@ const Checkout = () => {
   } = useGetMovieQuery(session?.movieId ?? 0)
 
   const [createPaymentIntent, { data }] = useCreatePaymentIntentMutation()
+  const [createOrder] = useCreateOrderMutation()
 
   console.log(totalPrice)
+
+  const handleCreateOrder = async () => {
+    try {
+      if (!session || !user) {
+        console.error('Invalid session data')
+        return
+      }
+
+      const order = {
+        sessionId: session._id,
+        userId: user?._id,
+        selectedSeats: seats,
+        totalSelectedSeats: tickets,
+        totalPrice: totalPrice,
+      }
+
+      const data = await createOrder(order)
+      console.log(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const handlePaymentIntent = async () => {
     try {
@@ -117,7 +141,7 @@ const Checkout = () => {
       )}
       {options && options.clientSecret && (
         <Elements stripe={stripePromise} options={options}>
-          <PaymentForm />
+          <PaymentForm createOrder={handleCreateOrder} />
         </Elements>
       )}
       <button onClick={handlePaymentIntent}>Intent</button>

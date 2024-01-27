@@ -4,20 +4,16 @@ import SessionModel from '../models/session.model'
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const sessionId = '65b1426e098a16dae11d63d4'
-    const userId = '65afa4946ddf6027d921ae33'
-    const selectedSeats = ['D1', 'D2']
-    const totalSelectedSeats = 1
-    const totalPrice = 199
+    const { sessionId, userId, selectedSeats, totalSelectedSeats, totalPrice } =
+      req.body
 
     const order = {
-      sessionId: sessionId,
-      userId: userId,
-      selectedSeats: selectedSeats,
-      totalSelectedSeats: totalSelectedSeats,
-      totalPrice: totalPrice,
+      sessionId,
+      userId,
+      selectedSeats,
+      totalSelectedSeats,
+      totalPrice,
     }
-
     const createdOrder = await OrderModel.create(order)
 
     const session = await SessionModel.findById(sessionId)

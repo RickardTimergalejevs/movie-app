@@ -1,6 +1,10 @@
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 
-const PaymentForm = () => {
+type Props = {
+  createOrder: () => void
+}
+
+const PaymentForm = ({ createOrder }: Props) => {
   const stripe = useStripe()
   const elements = useElements()
 
@@ -15,6 +19,7 @@ const PaymentForm = () => {
       return
     }
 
+    createOrder()
     const result = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
