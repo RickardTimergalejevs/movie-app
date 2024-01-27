@@ -16,6 +16,7 @@ import Login from './pages/Login/Login.tsx'
 import Authorization from './redux/features/auth/Authorization.tsx'
 import ProtectedRoutes from './routes/ProtectedRoutes.tsx'
 import Checkout from './pages/Checkout/Checkout.tsx'
+import Confirmation from './pages/Confirmation/Confirmation.tsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <Checkout />,
+      },
+      {
+        path: '/confirmation',
+        element: <Confirmation />,
       },
       {
         element: <ProtectedRoutes />,

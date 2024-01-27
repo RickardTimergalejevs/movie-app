@@ -24,4 +24,4 @@ export const ordersApi = createApi({
   }),
 })
 
-export const {} = ordersApi
+export const { useCreateOrderMutation } = ordersApi
