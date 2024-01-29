@@ -3,10 +3,13 @@ import { logout, selectCurrentUser } from '../../redux/features/auth/authSlice'
 import NavButton from '../../components/common/NavButton/NavButton'
 import { useDispatch } from 'react-redux'
 import './Profile.scss'
+import { useGetOrdersQuery } from '../../redux/services/order'
+import { useGetMovieQuery } from '../../redux/services/movies'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
   const dispatch = useDispatch()
+  const { data: order, isLoading, isError } = useGetOrdersQuery(user?._id || '')
 
   const handleLogout = () => {
     dispatch(logout())
@@ -36,6 +39,40 @@ const Profile = () => {
         <div className="tickets-current">
           <hr />
           <h3 className="tickets-current__title">Current</h3>
+          <div className="tickets-current-list">
+            {order?.map((order) => (
+              <div className="current-ticket">
+                <div className="current-ticket-details">
+                  <h1 className="current-ticket-details__field">
+                    {order.sessionId.movieId}
+                  </h1>
+                  <p className="current-ticket-details__field">
+                    <span>Date: </span>
+                    {order.sessionId?.showDate}
+                  </p>
+                  <p className="current-ticket-details__field">
+                    <span>Time: </span>
+                    {order.sessionId?.showTime}
+                  </p>
+                  <p className="current-ticket-details__field">
+                    <span>Type: </span>
+                    {order.sessionId?.displayType}
+                  </p>
+                  <p className="current-ticket-details__field">
+                    <span>Places: </span>
+                    {order.selectedSeats.join(', ')}
+                  </p>
+                  <p className="current-ticket-details__field">
+                    <span>Total Price: </span>
+                    {order.totalPrice} kr
+                  </p>
+                </div>
+                <div className="current-ticket-id">
+                  <p>{order._id}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
