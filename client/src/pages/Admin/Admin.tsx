@@ -4,10 +4,11 @@ import Input from '../../components/common/Input/Input'
 import * as Yup from 'yup'
 
 import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
+import { useCreateSessionMutation } from '../../redux/services/sessions'
 
 const Admin = () => {
   const { data: movie, isLoading, isError } = useGetPlayingMoviesQuery(1)
-  console.log(movie)
+  const [createSession] = useCreateSessionMutation()
 
   interface ISessionValues {
     movieId: number
@@ -35,10 +36,8 @@ const Admin = () => {
     displayType: Yup.string().required('Display type is required'),
   })
 
-  const handleSubmit = (values: ISessionValues, { setValues }) => {
-    const movieIdAsNumber = parseInt(values.movieId, 10)
-    setValues((prevValues) => ({ ...prevValues, movieId: movieIdAsNumber }))
-    console.log('Formatted Date:', values)
+  const handleSubmit = async (values: ISessionValues) => {
+    await createSession(values)
   }
 
   return (
