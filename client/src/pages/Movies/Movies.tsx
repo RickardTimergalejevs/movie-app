@@ -1,4 +1,5 @@
 import MovieList from '../../components/MovieList/MovieList'
+import Loader from '../../components/common/Loader/Loader'
 import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
 import './Movies.scss'
 
@@ -12,9 +13,7 @@ const Movies = () => {
         <h1 className="movie__page-title">Today</h1>
       </div>
       {isLoading ? (
-        <div>
-          <p>Loading...</p>
-        </div>
+        <Loader />
       ) : error ? (
         <div>
           <p>Error!</p>

@@ -1,3 +1,4 @@
+import Loader from '../../components/common/Loader/Loader'
 import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
 import './Home.scss'
 import { Link } from 'react-router-dom'
@@ -10,9 +11,7 @@ const Home = () => {
   const playingMovie = results[randomIndex]
 
   return isLoading ? (
-    <div>
-      <p>Loading...</p>
-    </div>
+    <Loader />
   ) : error ? (
     <div>
       <p>Error!</p>
