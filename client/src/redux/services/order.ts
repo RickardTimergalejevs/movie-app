@@ -1,6 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface IOrder {
+interface IOrderListResponse {
+  _id: string
+  sessionId: string
+  userId: string
+  selectedSeats: string[]
+  totalSelectedSeats: number
+  totalPrice: number
+}
+
+interface ICreateOrderRequest {
   sessionId: string
   userId: string
   selectedSeats: string[]
@@ -14,7 +23,10 @@ export const ordersApi = createApi({
     baseUrl: 'http://localhost:3000/api/orders/',
   }),
   endpoints: (builder) => ({
-    createOrder: builder.mutation<IOrder, IOrder>({
+    getOrders: builder.query<IOrderListResponse[], string>({
+      query: (userId) => `${userId}`,
+    }),
+    createOrder: builder.mutation<ICreateOrderRequest, ICreateOrderRequest>({
       query: (order) => ({
         url: '/',
         method: 'POST',
@@ -24,4 +36,4 @@ export const ordersApi = createApi({
   }),
 })
 
-export const { useCreateOrderMutation } = ordersApi
+export const { useGetOrdersQuery, useCreateOrderMutation } = ordersApi

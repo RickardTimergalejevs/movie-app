@@ -3,6 +3,6 @@ import { createOrder, getOrders } from '../controllers/order.controller'
 
 const orderRouter = Router()
   .post('/orders', createOrder)
-  .get('/orders', getOrders)
+  .get('/orders/:userId', getOrders)
 
 export default orderRouter
