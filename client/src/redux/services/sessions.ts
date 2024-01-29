@@ -34,6 +34,14 @@ interface ISessionListResponse {
   ]
 }
 
+interface ICreateSessionRequest {
+  movieId: number
+  city: string
+  showDate: string
+  showTime: string
+  displayType: string
+}
+
 export const sessionsApi = createApi({
   reducerPath: 'sessionsApi',
   baseQuery: fetchBaseQuery({
@@ -46,7 +54,18 @@ export const sessionsApi = createApi({
     >({
       query: ({ id, date }) => `sessions/${id}/${date}`,
     }),
+    createSession: builder.mutation<
+      ICreateSessionRequest,
+      ICreateSessionRequest
+    >({
+      query: (session) => ({
+        url: 'sessions',
+        method: 'POST',
+        body: session,
+      }),
+    }),
   }),
 })
 
-export const { useGetSessionsByMovieIdAndDateQuery } = sessionsApi
+export const { useGetSessionsByMovieIdAndDateQuery, useCreateSessionMutation } =
+  sessionsApi
