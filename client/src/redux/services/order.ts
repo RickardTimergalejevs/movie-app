@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IOrder } from '../../interfaces/order'
+import { ISession } from '../../interfaces/session'
 
-interface IOrderListResponse {
+export interface IOrderListResponse {
   _id: string
-  sessionId: string
+  sessionId: ISession
   userId: string
   selectedSeats: string[]
   totalSelectedSeats: number

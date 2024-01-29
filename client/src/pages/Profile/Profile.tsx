@@ -3,8 +3,12 @@ import { logout, selectCurrentUser } from '../../redux/features/auth/authSlice'
 import NavButton from '../../components/common/NavButton/NavButton'
 import { useDispatch } from 'react-redux'
 import './Profile.scss'
-import { useGetOrdersQuery } from '../../redux/services/order'
+import {
+  IOrderListResponse,
+  useGetOrdersQuery,
+} from '../../redux/services/order'
 import { useGetMovieQuery } from '../../redux/services/movies'
+import { getCurrentDate } from '../../utils/dateFormatter'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
@@ -15,6 +19,21 @@ const Profile = () => {
     dispatch(logout())
     localStorage.removeItem('token')
   }
+
+  console.log(getCurrentDate())
+
+  const isOrderPast = (orderDate: IOrderListResponse) => {
+    const currentDate = getCurrentDate()
+    return orderDate.sessionId.showDate < currentDate
+  }
+
+  const isOrderCurrent = (orderDate: IOrderListResponse) => {
+    const currentDate = getCurrentDate()
+    return orderDate.sessionId.showDate >= currentDate
+  }
+
+  const pastTickets = order?.filter((order) => isOrderPast(order))
+  const currentTickets = order?.filter((order) => isOrderCurrent(order))
 
   return (
     <div className="profile__page">
@@ -35,39 +54,70 @@ const Profile = () => {
         <div className="tickets-past">
           <hr />
           <h3 className="tickets-past__title">Past</h3>
-        </div>
-        <div className="tickets-current">
-          <hr />
-          <h3 className="tickets-current__title">Current</h3>
-          <div className="tickets-current-list">
-            {order?.map((order) => (
-              <div className="current-ticket">
-                <div className="current-ticket-details">
-                  <h1 className="current-ticket-details__field">
+          <div className="tickets-list">
+            {pastTickets?.map((order, index) => (
+              <div className="ticket-card" key={index}>
+                <div className="ticket-card-details">
+                  <h1 className="ticket-card-details__field">
                     {order.sessionId.movieId}
                   </h1>
-                  <p className="current-ticket-details__field">
+                  <p className="ticket-card-details__field">
                     <span>Date: </span>
                     {order.sessionId?.showDate}
                   </p>
-                  <p className="current-ticket-details__field">
+                  <p className="ticket-card-details__field">
                     <span>Time: </span>
                     {order.sessionId?.showTime}
                   </p>
-                  <p className="current-ticket-details__field">
+                  <p className="ticket-card-details__field">
                     <span>Type: </span>
                     {order.sessionId?.displayType}
                   </p>
-                  <p className="current-ticket-details__field">
+                  <p className="ticket-card-details__field">
                     <span>Places: </span>
                     {order.selectedSeats.join(', ')}
                   </p>
-                  <p className="current-ticket-details__field">
+                  <p className="ticket-card-details__field">
                     <span>Total Price: </span>
                     {order.totalPrice} kr
                   </p>
                 </div>
-                <div className="current-ticket-id">
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="tickets-current">
+          <hr />
+          <h3 className="tickets-current__title">Current</h3>
+          <div className="tickets-list">
+            {currentTickets?.map((order, index) => (
+              <div className="ticket-card" key={index}>
+                <div className="ticket-card-details">
+                  <h1 className="ticket-card-details__field">
+                    {order.sessionId.movieId}
+                  </h1>
+                  <p className="ticket-card-details__field">
+                    <span>Date: </span>
+                    {order.sessionId?.showDate}
+                  </p>
+                  <p className="ticket-card-details__field">
+                    <span>Time: </span>
+                    {order.sessionId?.showTime}
+                  </p>
+                  <p className="ticket-card-details__field">
+                    <span>Type: </span>
+                    {order.sessionId?.displayType}
+                  </p>
+                  <p className="ticket-card-details__field">
+                    <span>Places: </span>
+                    {order.selectedSeats.join(', ')}
+                  </p>
+                  <p className="ticket-card-details__field">
+                    <span>Total Price: </span>
+                    {order.totalPrice} kr
+                  </p>
+                </div>
+                <div className="ticket-card__id">
                   <p>{order._id}</p>
                 </div>
               </div>

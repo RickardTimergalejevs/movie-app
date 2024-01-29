@@ -93,7 +93,7 @@ const createSession = async (req: Request, res: Response) => {
       movieId: 787699,
       city: 'Stockholm',
       hall: createdHall,
-      showDate: '2024.02.02',
+      showDate: '2024.01.29',
       showTime: '18:00',
       displayType: '3D',
       tickets: [
