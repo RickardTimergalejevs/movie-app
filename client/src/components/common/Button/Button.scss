@@ -39,6 +39,16 @@
     }
   }
 
+  &--green {
+    background-color: $green;
+    color: $dark;
+
+    &:hover {
+      background-color: $dark;
+      color: $light;
+    }
+  }
+
   &--selected {
     background-color: $light;
     color: $dark;

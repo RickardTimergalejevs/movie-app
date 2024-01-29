@@ -5,9 +5,11 @@ import './MovieSession.scss'
 import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
 import { ISession } from '../../interfaces/session'
-import NavButton from '../common/NavButton/NavButton'
+import { useDispatch } from 'react-redux'
+import { setSession } from '../../redux/features/order/orderSlice'
 
 const MovieSession = () => {
+  const dispatch = useDispatch()
   const { id } = useParams()
 
   if (!id) {
@@ -29,12 +31,17 @@ const MovieSession = () => {
   const [selectedDate, setSelectedDate] = useState<string>(dates[0])
   const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
 
+  if (selectedSession) {
+    dispatch(setSession(selectedSession))
+  }
+
   const {
     data: sessions,
     error,
     isLoading,
   } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
   console.log(sessions)
+  console.log(selectedSession)
 
   return (
     sessions && (
@@ -47,15 +54,7 @@ const MovieSession = () => {
           selectedSession={selectedSession}
           setSelectedSession={setSelectedSession}
         />
-        {selectedSession && (
-          <>
-            <MovieHall selectedSession={selectedSession} />
-            <div className="session-purchase">
-              <p className="session-purchase__total">Total: 0 kr</p>
-              <NavButton children="Checkout" color="green" link="/checkout" />
-            </div>
-          </>
-        )}
+        {selectedSession && <MovieHall selectedSession={selectedSession} />}
       </div>
     )
   )

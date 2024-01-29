@@ -14,7 +14,7 @@ interface IRow {
 
 interface ISessionListResponse {
   _id: string
-  movieId: string
+  movieId: number
   city: string
   showDate: string
   showTime: string
@@ -25,6 +25,13 @@ interface ISessionListResponse {
     capacity: number
     rows: IRow[]
   }
+  tickets: [
+    {
+      _id: string
+      price: number
+      type: string
+    },
+  ]
 }
 
 export const sessionsApi = createApi({

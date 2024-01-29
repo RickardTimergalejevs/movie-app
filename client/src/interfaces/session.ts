@@ -10,9 +10,15 @@ export interface IRow {
   _id: string
 }
 
+export interface ITicket {
+  _id: string
+  price: number
+  type: string
+}
+
 export interface ISession {
   _id: string
-  movieId: string
+  movieId: number
   city: string
   showDate: string
   showTime: string
@@ -23,4 +29,5 @@ export interface ISession {
     capacity: number
     rows: IRow[]
   }
+  tickets: ITicket[]
 }
