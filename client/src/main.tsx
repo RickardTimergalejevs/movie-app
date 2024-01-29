@@ -14,9 +14,11 @@ import { store } from './redux/store.ts'
 import MovieDetails from './pages/MovieDetails/MovieDetails.tsx'
 import Login from './pages/Login/Login.tsx'
 import Authorization from './redux/features/auth/Authorization.tsx'
-import ProtectedRoutes from './routes/ProtectedRoutes.tsx'
 import Checkout from './pages/Checkout/Checkout.tsx'
 import Confirmation from './pages/Confirmation/Confirmation.tsx'
+import Admin from './pages/Admin/Admin.tsx'
+import AdminRoutes from './routes/AdminRoutes.tsx'
+import AuthRoutes from './routes/AuthRoutes.tsx'
 
 const router = createBrowserRouter([
   {
@@ -51,11 +53,20 @@ const router = createBrowserRouter([
         element: <Confirmation />,
       },
       {
-        element: <ProtectedRoutes />,
+        element: <AuthRoutes />,
         children: [
           {
             path: '/profile',
             element: <Profile />,
+          },
+        ],
+      },
+      {
+        element: <AdminRoutes />,
+        children: [
+          {
+            path: '/admin',
+            element: <Admin />,
           },
         ],
       },

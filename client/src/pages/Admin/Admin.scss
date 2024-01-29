@@ -1,0 +1,66 @@
+@import '../../../styles/variables';
+
+.admin__page {
+  .admin-nav {
+    position: relative;
+    text-align: center;
+    margin: 3rem 0 0;
+
+    hr {
+      position: relative;
+      top: 1.5rem;
+      border: 1px solid $light;
+    }
+
+    &__title {
+      position: relative;
+      display: inline-block;
+      font-family: $Archivo-Black;
+      text-transform: uppercase;
+      background-color: $dark;
+      padding: 0 2rem;
+    }
+  }
+
+  .admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .session-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 20rem;
+      margin: 3rem 0;
+
+      select {
+        background-color: $dark-extra-light;
+        color: $light;
+        padding: 0.5rem;
+        border: none;
+        cursor: pointer;
+        appearance: none;
+
+        &:focus {
+          border-left: 2px solid $light;
+          outline: none;
+        }
+      }
+
+      &__btn {
+        background-color: $green;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-family: $DM-Sans;
+        cursor: pointer;
+        margin-top: 1rem;
+
+        &:hover {
+          background-color: $light;
+        }
+      }
+    }
+  }
+}

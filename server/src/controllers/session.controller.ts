@@ -89,13 +89,15 @@ const createSession = async (req: Request, res: Response) => {
   const createdHall = await createHall()
 
   try {
+    const { movieId, city, showDate, showTime, displayType } = req.body
+
     const session: ISession = {
-      movieId: 787699,
-      city: 'Stockholm',
+      movieId: movieId,
+      city: city,
       hall: createdHall,
-      showDate: '2024.01.29',
-      showTime: '18:00',
-      displayType: '3D',
+      showDate: showDate,
+      showTime: showTime,
+      displayType: displayType,
       tickets: [
         new mongoose.Types.ObjectId('65b1126e7ecbe0c351f6387a'),
         new mongoose.Types.ObjectId('65b112b2ce6d8a3cf69fd1f2'),
