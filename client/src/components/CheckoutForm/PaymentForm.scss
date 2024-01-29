@@ -1,4 +1,6 @@
+@import '../../../styles/variables';
+
 .payment-form {
-  background-color: white;
+  border-left: 2px $light solid;
   padding: 1rem;
 }

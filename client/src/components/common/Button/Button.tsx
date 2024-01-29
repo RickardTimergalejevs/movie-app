@@ -7,6 +7,7 @@ type Props = {
   selected?: boolean
   onClick?: () => void
   children?: string | number
+  disabled?: boolean
 }
 
 const Button = ({
@@ -16,6 +17,7 @@ const Button = ({
   children,
   size,
   border,
+  disabled,
 }: Props) => {
   const hasColor = color ? `btn--${color}` : ''
   const hasSize = size ? `btn--${size}` : ''
@@ -26,6 +28,7 @@ const Button = ({
     <button
       className={`btn ${hasColor} ${hasSize} ${hasBorder} ${isSelected}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

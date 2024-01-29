@@ -1,5 +1,6 @@
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import './PaymentForm.scss'
+import Button from '../common/Button/Button'
 
 type Props = {
   createOrder: () => void
@@ -43,7 +44,7 @@ const PaymentForm = ({ createOrder }: Props) => {
   return (
     <form className="payment-form" onSubmit={handleSubmit}>
       <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+      <Button children={'Submit'} disabled={!stripe} color="green" />
     </form>
   )
 }
