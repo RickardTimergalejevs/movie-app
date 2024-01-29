@@ -22,42 +22,48 @@
     }
   }
 
-  .checkout-session-card {
-    font-style: italic;
-    border-left: 2px solid $light;
-    max-width: 30rem;
+  .checkout-details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    .checkout-movie-details {
-      border-bottom: 2px solid $light;
-      padding: 1rem 1rem 0.5rem;
+    .checkout-session-card {
+      font-style: italic;
+      border-left: 2px solid $light;
+      width: 30rem;
 
-      &__img {
-        width: 10rem;
-      }
-    }
+      .checkout-movie-details {
+        border-bottom: 2px solid $light;
+        padding: 1rem 1rem 0.5rem;
 
-    .checkout-session-details {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1rem;
-
-      &__field {
-        background-color: $light;
-        color: $dark;
-        padding: 0.2rem;
-
-        span {
-          font-weight: bold;
-          font-style: normal;
+        &__img {
+          width: 10rem;
         }
       }
 
-      &__seats {
+      .checkout-session-details {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.3rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+
+        &__field {
+          background-color: $light;
+          color: $dark;
+          padding: 0.2rem;
+
+          span {
+            font-weight: bold;
+            font-style: normal;
+          }
+        }
+
+        &__seats {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.3rem;
+        }
       }
     }
   }

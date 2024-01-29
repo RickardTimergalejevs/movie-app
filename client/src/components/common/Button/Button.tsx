@@ -1,7 +1,7 @@
 import './Button.scss'
 
 type Props = {
-  color?: 'light' | 'dark' | 'dark-extra-light'
+  color?: 'light' | 'dark' | 'dark-extra-light' | 'green'
   size?: 'small' | 'medium' | 'large'
   border?: 'rounded'
   selected?: boolean

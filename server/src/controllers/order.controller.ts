@@ -41,4 +41,17 @@ const createOrder = async (req: Request, res: Response) => {
   }
 }
 
-export { createOrder }
+const getOrders = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+
+    const orders = await OrderModel.find({ userId: userId })
+
+    res.status(200).json(orders)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Could not find orders' })
+  }
+}
+
+export { createOrder, getOrders }

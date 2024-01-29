@@ -19,6 +19,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import PaymentForm from '../../components/CheckoutForm/PaymentForm'
 import { useCreatePaymentIntentMutation } from '../../redux/services/checkout'
 import { useCreateOrderMutation } from '../../redux/services/order'
+import Button from '../../components/common/Button/Button'
 
 const stripePromise = loadStripe(
   'pk_test_51No0MbDTXgg9R4l79HoWqQ6c04s4MwafTWwjHTXldXwUyczHZtlPtKFXQ1ExepQXmFeKJGRYQxUkgNajHuTAQObq007UAB1v44',
@@ -104,49 +105,50 @@ const Checkout = () => {
       <div className="checkout-back-btn">
         <NavButton children="Back" onClick={() => navigate(-1)} />
       </div>
-      {session && movie && (
-        <div className="checkout-session-card">
-          <div className="checkout-movie-details">
-            <img
-              className="checkout-movie-details__img"
-              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-              alt={movie.title}
-            />
-            <h2 className="checkout-movie-details__title">{movie.title}</h2>
-          </div>
-          <div className="checkout-session-details">
-            <p className="checkout-session-details__field">
-              <span>Date:</span> {session.showDate}
-            </p>
-            <p className="checkout-session-details__field">
-              <span>Time:</span> {session.showTime}
-            </p>
-            <p className="checkout-session-details__field">
-              <span>Type:</span> {session.displayType}
-            </p>
-            <p className="checkout-session-details__field">
-              <span>Tickets:</span> {tickets}
-            </p>
-            <div className="checkout-session-details__field checkout-session-details__seats">
-              <p>
-                <span>Seats:</span>{' '}
-              </p>
-              <p>{seats.join(', ')}</p>
+      <div className="checkout-details">
+        {session && movie && (
+          <div className="checkout-session-card">
+            <div className="checkout-movie-details">
+              <img
+                className="checkout-movie-details__img"
+                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <h2 className="checkout-movie-details__title">{movie.title}</h2>
             </div>
-            <p className="checkout-session-details__field">
-              <span>Total Price:</span> {totalPrice} kr
-            </p>
+            <div className="checkout-session-details">
+              <p className="checkout-session-details__field">
+                <span>Date:</span> {session.showDate}
+              </p>
+              <p className="checkout-session-details__field">
+                <span>Time:</span> {session.showTime}
+              </p>
+              <p className="checkout-session-details__field">
+                <span>Type:</span> {session.displayType}
+              </p>
+              <p className="checkout-session-details__field">
+                <span>Tickets:</span> {tickets}
+              </p>
+              <div className="checkout-session-details__field checkout-session-details__seats">
+                <p>
+                  <span>Seats:</span>{' '}
+                </p>
+                <p>{seats.join(', ')}</p>
+              </div>
+              <p className="checkout-session-details__field">
+                <span>Total Price:</span> {totalPrice} kr
+              </p>
+            </div>
           </div>
-        </div>
-      )}
-      {options && options.clientSecret && (
-        <Elements stripe={stripePromise} options={options}>
-          <PaymentForm createOrder={handleCreateOrder} />
-        </Elements>
-      )}
-      <button onClick={handlePaymentIntent}>Intent</button>
+        )}
+        {options && options.clientSecret && (
+          <Elements stripe={stripePromise} options={options}>
+            <PaymentForm createOrder={handleCreateOrder} />
+          </Elements>
+        )}
+      </div>
       <div>
-        <NavButton children="Buy" color="green" />
+        <Button children="Buy" color="green" onClick={handlePaymentIntent} />
       </div>
     </div>
   )

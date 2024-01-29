@@ -93,8 +93,8 @@ const createSession = async (req: Request, res: Response) => {
       movieId: 787699,
       city: 'Stockholm',
       hall: createdHall,
-      showDate: '2024.01.27',
-      showTime: '20:00',
+      showDate: '2024.02.02',
+      showTime: '18:00',
       displayType: '3D',
       tickets: [
         new mongoose.Types.ObjectId('65b1126e7ecbe0c351f6387a'),

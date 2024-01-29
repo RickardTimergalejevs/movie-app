@@ -1,4 +1,5 @@
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
+import './PaymentForm.scss'
 
 type Props = {
   createOrder: () => void
@@ -8,7 +9,7 @@ const PaymentForm = ({ createOrder }: Props) => {
   const stripe = useStripe()
   const elements = useElements()
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault()
@@ -20,6 +21,7 @@ const PaymentForm = ({ createOrder }: Props) => {
     }
 
     createOrder()
+
     const result = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
@@ -39,7 +41,7 @@ const PaymentForm = ({ createOrder }: Props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="payment-form" onSubmit={handleSubmit}>
       <PaymentElement />
       <button disabled={!stripe}>Submit</button>
     </form>
