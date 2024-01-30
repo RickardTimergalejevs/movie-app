@@ -42,7 +42,9 @@ const Datepicker: React.FC<Props> = ({
       <div className="session-date">
         <div className="session-date__title-container">
           <p className="session-date__title">
-            {formatDateWithWeekdayMonthAbbreviation(selectedDate)}
+            {selectedDate
+              ? formatDateWithWeekdayMonthAbbreviation(selectedDate)
+              : 'Select Date'}
           </p>
         </div>
         <div className="session-date__dates">
@@ -64,17 +66,21 @@ const Datepicker: React.FC<Props> = ({
           <p className="session-time__title">Show Time</p>
         </div>
         <div className="session-time__time">
-          {sessions?.map((session) => (
-            <div className="time" key={session._id}>
-              <p className="session-time__type">{session.displayType}</p>
-              <Button
-                children={session.showTime}
-                color="dark"
-                selected={session === selectedSession}
-                onClick={() => handleSessionClick(session)}
-              />
-            </div>
-          ))}
+          {sessions.length > 0 ? (
+            sessions?.map((session) => (
+              <div className="time" key={session._id}>
+                <p className="session-time__type">{session.displayType}</p>
+                <Button
+                  children={session.showTime}
+                  color="dark"
+                  selected={session === selectedSession}
+                  onClick={() => handleSessionClick(session)}
+                />
+              </div>
+            ))
+          ) : (
+            <p>Select date</p>
+          )}
         </div>
       </div>
     </div>

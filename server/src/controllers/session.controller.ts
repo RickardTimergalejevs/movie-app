@@ -23,6 +23,28 @@ const getAllSessions = async (req: Request, res: Response) => {
   }
 }
 
+const getSessionsByMovieId = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+
+    const session = await SessionModel.find({ movieId: id })
+      .sort({ showDate: 1, showTime: 1 })
+      .populate<{
+        hall: IHall
+        tickets: ITicket[]
+      }>(['hall', 'tickets'])
+
+    if (!session) {
+      res.status(404).json({ message: 'Sessions not found for this movieId' })
+    }
+
+    res.status(200).json(session)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+}
+
 const getSessionsByMovieIdAndDate = async (req: Request, res: Response) => {
   try {
     const { id, date } = req.params
@@ -114,4 +136,9 @@ const createSession = async (req: Request, res: Response) => {
   }
 }
 
-export { getAllSessions, getSessionsByMovieIdAndDate, createSession }
+export {
+  getAllSessions,
+  getSessionsByMovieId,
+  getSessionsByMovieIdAndDate,
+  createSession,
+}

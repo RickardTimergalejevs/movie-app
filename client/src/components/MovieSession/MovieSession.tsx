@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useGetSessionsByMovieIdAndDateQuery } from '../../redux/services/sessions'
+import {
+  useGetSessionsByMovieIdAndDateQuery,
+  useGetSessionsByMovieIdQuery,
+} from '../../redux/services/sessions'
 import './MovieSession.scss'
 import Datepicker from '../Datepicker/Datepicker'
 import MovieHall from '../MovieHall/MovieHall'
@@ -16,38 +19,38 @@ const MovieSession = () => {
     return <div>Error: Movie ID is not provided</div>
   }
 
-  let dates: string[] = []
-
-  for (let i = 0; i < 5; i++) {
-    const date = new Date()
-    date.setDate(date.getDate() + i)
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
-    const formattedDate = `${year}-${month}-${day}`
-    dates.push(formattedDate)
-  }
-
+  const [dates, setDates] = useState<string[]>([])
   const [selectedDate, setSelectedDate] = useState<string>(dates[0])
   const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
+
+  const { data: sessionsByMovieId } = useGetSessionsByMovieIdQuery({ id })
+
+  const {
+    data: sessionsByMovieIdAndDate,
+    error,
+    isLoading,
+  } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
+
+  useEffect(() => {
+    if (sessionsByMovieId) {
+      const newDates = sessionsByMovieId.map((session) => session.showDate)
+      setDates(newDates)
+    }
+  }, [sessionsByMovieId])
 
   if (selectedSession) {
     dispatch(setSession(selectedSession))
   }
 
-  const {
-    data: sessions,
-    error,
-    isLoading,
-  } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
-  console.log(sessions)
+  console.log(sessionsByMovieIdAndDate)
   console.log(selectedSession)
+  console.log('sessionsByMovieId', sessionsByMovieId)
 
   return (
-    sessions && (
+    sessionsByMovieIdAndDate && (
       <div className="session-body">
         <Datepicker
-          sessions={sessions}
+          sessions={sessionsByMovieIdAndDate}
           dates={dates}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}

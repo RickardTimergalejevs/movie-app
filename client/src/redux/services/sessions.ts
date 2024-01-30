@@ -47,6 +47,7 @@ export const sessionsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000/api/',
   }),
+  tagTypes: ['Session'],
   endpoints: (builder) => ({
     getAllSessions: builder.query<ISessionListResponse[], void>({
       query: () => `sessions`,
@@ -57,6 +58,12 @@ export const sessionsApi = createApi({
     >({
       query: ({ id, date }) => `sessions/${id}/${date}`,
     }),
+    getSessionsByMovieId: builder.query<ISessionListResponse[], { id: string }>(
+      {
+        query: ({ id }) => `sessions/${id}`,
+        providesTags: ['Session'],
+      },
+    ),
     createSession: builder.mutation<
       ICreateSessionRequest,
       ICreateSessionRequest
@@ -66,12 +73,14 @@ export const sessionsApi = createApi({
         method: 'POST',
         body: session,
       }),
+      invalidatesTags: ['Session'],
     }),
   }),
 })
 
 export const {
   useGetAllSessionsQuery,
+  useGetSessionsByMovieIdQuery,
   useGetSessionsByMovieIdAndDateQuery,
   useCreateSessionMutation,
 } = sessionsApi

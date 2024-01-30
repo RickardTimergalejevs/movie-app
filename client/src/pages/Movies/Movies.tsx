@@ -22,7 +22,8 @@ const Movies = () => {
   )
 
   const isLoading = playingMoviesLoading || sessionsLoading
-  const error = playingMoviesError || sessionsError
+  const error =
+    playingMoviesError || sessionsError || moviesWithSessions?.length === 0
 
   console.log(sessions)
   console.log(moviesWithSessions)
@@ -37,7 +38,7 @@ const Movies = () => {
         <Loader />
       ) : error ? (
         <div>
-          <p>Error!</p>
+          <p>No sessions</p>
         </div>
       ) : (
         <MovieList movies={moviesWithSessions} showRating={true} />
