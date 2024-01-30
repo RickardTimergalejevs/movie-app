@@ -1,10 +1,10 @@
 import Loader from '../../components/common/Loader/Loader'
-import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
+import { useGetUpcomingMoviesQuery } from '../../redux/services/movies'
 import './Home.scss'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
-  const { data: playingMovies, error, isLoading } = useGetPlayingMoviesQuery(1)
+  const { data: playingMovies, error, isLoading } = useGetUpcomingMoviesQuery(1)
 
   const results = playingMovies?.results || []
   const randomIndex = Math.floor(Math.random() * results.length)
@@ -28,7 +28,7 @@ const Home = () => {
       <div className="home__page-details">
         <h1 className="home__page-movie-title">{playingMovie?.title}</h1>
         <Link to={`/movie/${playingMovie?.id}`}>
-          <h1 className="home__page-title">Watch now</h1>
+          <h1 className="home__page-title">Watch soon</h1>
         </Link>
       </div>
     </div>
