@@ -7,6 +7,7 @@ import {
   convertToHoursAndMinutes,
   formatDateWithMonthAbbreviation,
 } from '../../utils/dateFormatter'
+import Loader from '../../components/common/Loader/Loader'
 
 const MovieDetails = () => {
   const { id } = useParams()
@@ -16,10 +17,12 @@ const MovieDetails = () => {
   }
   const movieId = parseInt(id, 10)
 
-  const { data: movie, error, isLoading } = useGetMovieQuery(movieId)
+  const { data: movie, isLoading } = useGetMovieQuery(movieId)
   console.log(movie)
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     movie && (
       <div className="movie-details__page">
         <div className="movie-body">

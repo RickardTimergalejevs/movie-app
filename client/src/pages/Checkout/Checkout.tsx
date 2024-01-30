@@ -35,11 +35,7 @@ const Checkout = () => {
   const tickets = useSelector(selectTotalSelectedSeats)
   const totalPrice = useSelector(selectTotalPrice)
 
-  const {
-    data: movie,
-    isLoading,
-    isError,
-  } = useGetMovieQuery(session?.movieId ?? 0)
+  const { data: movie } = useGetMovieQuery(session?.movieId ?? 0)
 
   const [createPaymentIntent, { data }] = useCreatePaymentIntentMutation()
   const [createOrder] = useCreateOrderMutation()
@@ -84,7 +80,6 @@ const Checkout = () => {
   }
 
   const options = {
-    // passing the client secret obtained from the server
     clientSecret: data?.clientSecret || '',
   }
 

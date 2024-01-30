@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IOrder } from '../../interfaces/order'
 import { ISession } from '../../interfaces/session'
 
 export interface IOrderListResponse {

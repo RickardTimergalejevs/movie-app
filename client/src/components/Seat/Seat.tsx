@@ -17,7 +17,6 @@ type Props = {
 
 const Seat = ({
   type,
-  id,
   isBooked,
   selectedSeats,
   seat,

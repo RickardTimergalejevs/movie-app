@@ -7,14 +7,14 @@ import {
   IOrderListResponse,
   useGetOrdersQuery,
 } from '../../redux/services/order'
-import { useGetMovieQuery } from '../../redux/services/movies'
+
 import { getCurrentDate } from '../../utils/dateFormatter'
 import TicketCard from '../../components/TicketCard/TicketCard'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
   const dispatch = useDispatch()
-  const { data: order, isLoading, isError } = useGetOrdersQuery(user?._id || '')
+  const { data: order } = useGetOrdersQuery(user?._id || '')
 
   const handleLogout = () => {
     dispatch(logout())

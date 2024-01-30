@@ -1,11 +1,4 @@
-import {
-  ErrorMessage,
-  Field,
-  FieldProps,
-  Form,
-  Formik,
-  FormikHelpers,
-} from 'formik'
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import Input from '../../components/common/Input/Input'
 import * as Yup from 'yup'
 import './Admin.scss'
@@ -14,7 +7,7 @@ import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
 import { useCreateSessionMutation } from '../../redux/services/sessions'
 
 const Admin = () => {
-  const { data: movie, isLoading, isError } = useGetPlayingMoviesQuery(1)
+  const { data: movie } = useGetPlayingMoviesQuery(1)
   const [createSession, { isSuccess }] = useCreateSessionMutation()
 
   interface ISessionValues {

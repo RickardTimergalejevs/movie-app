@@ -9,11 +9,7 @@ type Props = {
 }
 
 const TicketCard = ({ order, index, showId = false }: Props) => {
-  const {
-    data: movie,
-    error,
-    isLoading,
-  } = useGetMovieQuery(order.sessionId.movieId)
+  const { data: movie } = useGetMovieQuery(order.sessionId.movieId)
 
   return (
     <div className="ticket-card" key={index}>

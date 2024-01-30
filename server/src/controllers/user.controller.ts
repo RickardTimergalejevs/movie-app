@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import UserModel from '../models/user.model'
 
 interface AuthenticatedRequest extends Request {
-  user?: any // Adjust the type according to your user object structure
+  user?: any
 }
 
 const registerUser = async (req: Request, res: Response) => {

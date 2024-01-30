@@ -30,14 +30,11 @@ const MovieSession = () => {
   console.log(sessionsByMovieId?.[0].showDate)
   console.log(selectedDate)
 
-  const {
-    data: sessionsByMovieIdAndDate,
-    error,
-    isLoading,
-  } = useGetSessionsByMovieIdAndDateQuery(
-    { id, date: selectedDate },
-    { pollingInterval: 20000 },
-  )
+  const { data: sessionsByMovieIdAndDate } =
+    useGetSessionsByMovieIdAndDateQuery(
+      { id, date: selectedDate },
+      { pollingInterval: 20000 },
+    )
 
   useEffect(() => {
     if (sessionsByMovieId) {

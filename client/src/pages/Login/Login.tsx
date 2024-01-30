@@ -9,6 +9,8 @@ import {
   useRegisterMutation,
 } from '../../redux/services/auth'
 import { useNavigate } from 'react-router-dom'
+import Error from '../../components/common/Error/Error'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 interface ILoginValues {
   email: string
@@ -44,7 +46,7 @@ const Login = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false)
   const navigate = useNavigate()
 
-  const [register, { isSuccess, error: registerError }] = useRegisterMutation()
+  const [register, { error: registerError }] = useRegisterMutation()
   const [login, { isError, error: loginError }] = useLoginMutation()
   console.log(loginError)
 
@@ -52,7 +54,12 @@ const Login = () => {
     setIsRegisterForm(!isRegisterForm)
   }
 
-  const error = loginError?.data?.message || registerError?.data?.message
+  const errorData = ((loginError as FetchBaseQueryError)?.data ||
+    (registerError as FetchBaseQueryError)?.data) as
+    | { message: string }
+    | undefined
+
+  const errorMessage = errorData?.message
 
   const handleRegister = async (values: IRegisterValues) => {
     try {
@@ -182,6 +189,7 @@ const Login = () => {
               </Form>
             </Formik>
           )}
+          {isError && <Error children={errorMessage} />}
           <div className="login-footer">
             <p className="login-footer__title">Or</p>
             <p className="login-footer__type" onClick={handleChangeForm}>

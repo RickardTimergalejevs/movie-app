@@ -4,7 +4,7 @@ import './Home.scss'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
-  const { data: playingMovies, error, isLoading } = useGetUpcomingMoviesQuery(1)
+  const { data: playingMovies, isLoading } = useGetUpcomingMoviesQuery(1)
 
   const results = playingMovies?.results || []
   const randomIndex = Math.floor(Math.random() * results.length)
@@ -12,10 +12,6 @@ const Home = () => {
 
   return isLoading ? (
     <Loader />
-  ) : error ? (
-    <div>
-      <p>Error!</p>
-    </div>
   ) : (
     <div className="home__page">
       <div className="home__page-movie-body">

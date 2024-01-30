@@ -5,25 +5,17 @@ import { useGetAllSessionsQuery } from '../../redux/services/sessions'
 import './Movies.scss'
 
 const Movies = () => {
-  const {
-    data: playingMovies,
-    error: playingMoviesError,
-    isLoading: playingMoviesLoading,
-  } = useGetPlayingMoviesQuery(1)
+  const { data: playingMovies, isLoading: playingMoviesLoading } =
+    useGetPlayingMoviesQuery(1)
 
-  const {
-    data: sessions,
-    error: sessionsError,
-    isLoading: sessionsLoading,
-  } = useGetAllSessionsQuery()
+  const { data: sessions, isLoading: sessionsLoading } =
+    useGetAllSessionsQuery()
 
   const moviesWithSessions = playingMovies?.results.filter(
     (movie) => sessions?.some((session) => session.movieId === movie.id),
   )
 
   const isLoading = playingMoviesLoading || sessionsLoading
-  const error =
-    playingMoviesError || sessionsError || moviesWithSessions?.length === 0
 
   console.log(sessions)
   console.log(moviesWithSessions)
@@ -36,10 +28,6 @@ const Movies = () => {
       </div>
       {isLoading ? (
         <Loader />
-      ) : error ? (
-        <div>
-          <p>No sessions</p>
-        </div>
       ) : (
         <MovieList movies={moviesWithSessions} showRating={true} />
       )}

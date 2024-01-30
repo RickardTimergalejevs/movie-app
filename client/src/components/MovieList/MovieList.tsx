@@ -1,4 +1,4 @@
-import { IMovie, IMovieListResponse } from '../../interfaces/movie'
+import { IMovie } from '../../interfaces/movie'
 import MovieCard from '../MovieCard/MovieCard'
 import './MovieList.scss'
 
