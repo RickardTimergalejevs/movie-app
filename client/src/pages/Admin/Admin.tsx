@@ -49,6 +49,12 @@ const Admin = () => {
     resetForm()
   }
 
+  const today = new Date()
+  const minDate = today.toISOString().split('T')[0]
+  const maxDate = new Date(today.setDate(today.getDate() + 4))
+    .toISOString()
+    .split('T')[0]
+
   return (
     <div className="admin__page">
       <div className="admin-nav">
@@ -93,6 +99,8 @@ const Admin = () => {
               type="date"
               name="showDate"
               id="showDate"
+              min={minDate}
+              max={maxDate}
               component={Input}
             />
             <label>Select time</label>
