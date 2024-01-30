@@ -6,6 +6,8 @@ type Props = {
   createOrder: () => void
 }
 
+const SUCCESS_CONFRIM_PAYMENT_URL = import.meta.env.SUCCESS_CONFRIM_PAYMENT_URL
+
 const PaymentForm = ({ createOrder }: Props) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -22,7 +24,7 @@ const PaymentForm = ({ createOrder }: Props) => {
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'http://localhost:5173/confirmation',
+        return_url: SUCCESS_CONFRIM_PAYMENT_URL,
       },
     })
 

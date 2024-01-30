@@ -42,25 +42,27 @@ interface ICreateSessionRequest {
   displayType: string
 }
 
+const SESSIONS_URL = import.meta.env.VITE_SESSIONS_URL
+
 export const sessionsApi = createApi({
   reducerPath: 'sessionsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/',
+    baseUrl: SESSIONS_URL,
   }),
   tagTypes: ['Session'],
   endpoints: (builder) => ({
     getAllSessions: builder.query<ISessionListResponse[], void>({
-      query: () => `sessions`,
+      query: () => `/`,
     }),
     getSessionsByMovieIdAndDate: builder.query<
       ISessionListResponse[],
       { id: string; date: string }
     >({
-      query: ({ id, date }) => `sessions/${id}/${date}`,
+      query: ({ id, date }) => `${id}/${date}`,
     }),
     getSessionsByMovieId: builder.query<ISessionListResponse[], { id: string }>(
       {
-        query: ({ id }) => `sessions/${id}`,
+        query: ({ id }) => `${id}`,
         providesTags: ['Session'],
       },
     ),
@@ -69,7 +71,7 @@ export const sessionsApi = createApi({
       ICreateSessionRequest
     >({
       query: (session) => ({
-        url: 'sessions',
+        url: '/',
         method: 'POST',
         body: session,
       }),

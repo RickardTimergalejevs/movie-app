@@ -21,9 +21,9 @@ import { useCreatePaymentIntentMutation } from '../../redux/services/checkout'
 import { useCreateOrderMutation } from '../../redux/services/order'
 import Button from '../../components/common/Button/Button'
 
-const stripePromise = loadStripe(
-  'pk_test_51No0MbDTXgg9R4l79HoWqQ6c04s4MwafTWwjHTXldXwUyczHZtlPtKFXQ1ExepQXmFeKJGRYQxUkgNajHuTAQObq007UAB1v44',
-)
+const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY
+
+const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
 
 const Checkout = () => {
   const dispatch = useDispatch()

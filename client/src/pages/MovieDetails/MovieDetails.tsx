@@ -9,6 +9,8 @@ import {
 } from '../../utils/dateFormatter'
 import Loader from '../../components/common/Loader/Loader'
 
+const POSTER_PATH = import.meta.env.VITE_TMBD_POSTER_PATH
+
 const MovieDetails = () => {
   const { id } = useParams()
 
@@ -28,7 +30,7 @@ const MovieDetails = () => {
         <div className="movie-body">
           <img
             className="movie-body__img"
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            src={`${POSTER_PATH}${movie.poster_path}`}
             alt={movie.title}
           />
           <div className="movie-description">

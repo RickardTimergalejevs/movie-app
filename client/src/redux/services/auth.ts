@@ -39,11 +39,11 @@ interface ICurrentUserRequest {
   password: string
 }
 
-const API_URL = 'http://localhost:3000/api/' // to env
+const USERS_URL = import.meta.env.VITE_USERS_URL
 
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/users/',
+    baseUrl: USERS_URL,
     prepareHeaders(headers, { getState }) {
       const token =
         (getState() as RootState).auth.token || localStorage.getItem('token')

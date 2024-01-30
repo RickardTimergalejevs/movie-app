@@ -10,6 +10,8 @@ const Home = () => {
   const randomIndex = Math.floor(Math.random() * results.length)
   const playingMovie = results[randomIndex]
 
+  const POSTER_PATH = import.meta.env.VITE_TMBD_POSTER_PATH
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -17,7 +19,7 @@ const Home = () => {
       <div className="home__page-movie-body">
         <img
           className="home__page-movie-img"
-          src={`https://image.tmdb.org/t/p/original/${playingMovie?.backdrop_path}`}
+          src={`${POSTER_PATH}${playingMovie?.backdrop_path}`}
           alt={playingMovie?.title}
         />
       </div>
