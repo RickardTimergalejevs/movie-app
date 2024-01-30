@@ -37,31 +37,33 @@ const MovieDetails = () => {
             </p>
           </div>
         </div>
-        <div className="movie-container">
-          <div className="movie-details">
-            <h1 className="movie-details__title">{movie.title}</h1>
-            <div className="movie-details__genres">
-              {movie?.genres.map((genre, key) => (
-                <p className="movie-details__genre" key={key}>
-                  {genre.name}
-                </p>
-              ))}
+        <div className="movie-body-info">
+          <div className="movie-container">
+            <div className="movie-details">
+              <h1 className="movie-details__title">{movie.title}</h1>
+              <div className="movie-details__genres">
+                {movie?.genres.map((genre, key) => (
+                  <p className="movie-details__genre" key={key}>
+                    {genre.name}
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="movie-info">
-            <p className="movie-info__runtime">
-              {convertToHoursAndMinutes(movie.runtime)}
-            </p>
-            <p className="movie-info__age">
-              <span>{movie.adult === false ? '12+' : '18+'}</span>
-            </p>
-            <p
-              className={`movie-rating ${getRatingColorClass(
-                movie.vote_average,
-              )}`}
-            >
-              {roundVoteAverage(movie.vote_average)}
-            </p>
+            <div className="movie-info">
+              <p className="movie-info__runtime">
+                {convertToHoursAndMinutes(movie.runtime)}
+              </p>
+              <p className="movie-info__age">
+                <span>{movie.adult === false ? '12+' : '18+'}</span>
+              </p>
+              <p
+                className={`movie-rating ${getRatingColorClass(
+                  movie.vote_average,
+                )}`}
+              >
+                {roundVoteAverage(movie.vote_average)}
+              </p>
+            </div>
           </div>
           <MovieSession />
         </div>

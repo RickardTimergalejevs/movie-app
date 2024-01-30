@@ -43,8 +43,9 @@ const PaymentForm = ({ createOrder }: Props) => {
 
   return (
     <form className="payment-form" onSubmit={handleSubmit}>
+      <h1>Dina uppgifter</h1>
       <PaymentElement />
-      <Button children={'Submit'} disabled={!stripe} color="green" />
+      <Button children={'Betala köp'} disabled={!stripe} color="green" />
     </form>
   )
 }

@@ -23,7 +23,12 @@ const MovieSession = () => {
   const [selectedDate, setSelectedDate] = useState<string>(dates[0])
   const [selectedSession, setSelectedSession] = useState<ISession | null>(null)
 
-  const { data: sessionsByMovieId } = useGetSessionsByMovieIdQuery({ id })
+  const { data: sessionsByMovieId } = useGetSessionsByMovieIdQuery({
+    id,
+  })
+
+  console.log(sessionsByMovieId?.[0].showDate)
+  console.log(selectedDate)
 
   const {
     data: sessionsByMovieIdAndDate,
@@ -31,7 +36,7 @@ const MovieSession = () => {
     isLoading,
   } = useGetSessionsByMovieIdAndDateQuery(
     { id, date: selectedDate },
-    { pollingInterval: 10000 },
+    { pollingInterval: 20000 },
   )
 
   useEffect(() => {
@@ -41,6 +46,7 @@ const MovieSession = () => {
         .map((session) => session.showDate)
         .filter((date) => date >= currentDate)
       setDates(newDates)
+      setSelectedDate(newDates[0])
     }
   }, [sessionsByMovieId])
 
