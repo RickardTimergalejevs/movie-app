@@ -9,6 +9,7 @@ import {
 } from '../../redux/services/order'
 import { useGetMovieQuery } from '../../redux/services/movies'
 import { getCurrentDate } from '../../utils/dateFormatter'
+import TicketCard from '../../components/TicketCard/TicketCard'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
@@ -56,33 +57,7 @@ const Profile = () => {
           <h3 className="tickets-past__title">Past</h3>
           <div className="tickets-list">
             {pastTickets?.map((order, index) => (
-              <div className="ticket-card" key={index}>
-                <div className="ticket-card-details">
-                  <h1 className="ticket-card-details__field">
-                    {order.sessionId.movieId}
-                  </h1>
-                  <p className="ticket-card-details__field">
-                    <span>Date: </span>
-                    {order.sessionId?.showDate}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Time: </span>
-                    {order.sessionId?.showTime}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Type: </span>
-                    {order.sessionId?.displayType}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Places: </span>
-                    {order.selectedSeats.join(', ')}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Total Price: </span>
-                    {order.totalPrice} kr
-                  </p>
-                </div>
-              </div>
+              <TicketCard order={order} index={index} />
             ))}
           </div>
         </div>
@@ -91,36 +66,7 @@ const Profile = () => {
           <h3 className="tickets-current__title">Current</h3>
           <div className="tickets-list">
             {currentTickets?.map((order, index) => (
-              <div className="ticket-card" key={index}>
-                <div className="ticket-card-details">
-                  <h1 className="ticket-card-details__field">
-                    {order.sessionId.movieId}
-                  </h1>
-                  <p className="ticket-card-details__field">
-                    <span>Date: </span>
-                    {order.sessionId?.showDate}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Time: </span>
-                    {order.sessionId?.showTime}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Type: </span>
-                    {order.sessionId?.displayType}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Places: </span>
-                    {order.selectedSeats.join(', ')}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Total Price: </span>
-                    {order.totalPrice} kr
-                  </p>
-                </div>
-                <div className="ticket-card__id">
-                  <p>{order._id}</p>
-                </div>
-              </div>
+              <TicketCard order={order} index={index} showId={true} />
             ))}
           </div>
         </div>

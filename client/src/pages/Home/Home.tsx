@@ -27,7 +27,7 @@ const Home = () => {
       </div>
       <div className="home__page-details">
         <h1 className="home__page-movie-title">{playingMovie?.title}</h1>
-        <Link to={`/movie/${playingMovie?.id}`}>
+        <Link to={`/upcoming`}>
           <h1 className="home__page-title">Watch soon</h1>
         </Link>
       </div>

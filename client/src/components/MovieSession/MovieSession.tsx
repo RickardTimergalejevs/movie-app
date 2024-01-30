@@ -33,7 +33,10 @@ const MovieSession = () => {
 
   useEffect(() => {
     if (sessionsByMovieId) {
-      const newDates = sessionsByMovieId.map((session) => session.showDate)
+      const currentDate = new Date().toISOString().split('T')[0]
+      const newDates = sessionsByMovieId
+        .map((session) => session.showDate)
+        .filter((date) => date >= currentDate)
       setDates(newDates)
     }
   }, [sessionsByMovieId])

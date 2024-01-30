@@ -36,5 +36,5 @@ export const authenticate = (
 }
 
 export const generateAccessToken = (user: IUser) => {
-  return jwt.sign(user, secretKey, { expiresIn: '30m' })
+  return jwt.sign(user, secretKey, { expiresIn: '60m' })
 }

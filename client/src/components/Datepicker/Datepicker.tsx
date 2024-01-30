@@ -44,7 +44,7 @@ const Datepicker: React.FC<Props> = ({
           <p className="session-date__title">
             {selectedDate
               ? formatDateWithWeekdayMonthAbbreviation(selectedDate)
-              : 'Select Date'}
+              : 'Show Date'}
           </p>
         </div>
         <div className="session-date__dates">
