@@ -1,9 +1,9 @@
-import { IMovieListResponse } from '../../interfaces/movie'
+import { IMovie, IMovieListResponse } from '../../interfaces/movie'
 import MovieCard from '../MovieCard/MovieCard'
 import './MovieList.scss'
 
 type Props = {
-  movies?: IMovieListResponse
+  movies?: IMovie[]
   showDate?: boolean
   showRating?: boolean
 }
@@ -13,7 +13,7 @@ const MovieList = ({ movies, showDate, showRating }: Props) => {
 
   return (
     <div className="movie__list">
-      {movies?.results.map((movie) => (
+      {movies?.map((movie) => (
         <MovieCard
           key={movie.id}
           id={movie.id}

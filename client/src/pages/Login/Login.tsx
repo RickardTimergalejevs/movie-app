@@ -44,12 +44,15 @@ const Login = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false)
   const navigate = useNavigate()
 
-  const [register, { isSuccess }] = useRegisterMutation()
-  const [login] = useLoginMutation()
+  const [register, { isSuccess, error: registerError }] = useRegisterMutation()
+  const [login, { isError, error: loginError }] = useLoginMutation()
+  console.log(loginError)
 
   const handleChangeForm = () => {
     setIsRegisterForm(!isRegisterForm)
   }
+
+  const error = loginError?.data?.message || registerError?.data?.message
 
   const handleRegister = async (values: IRegisterValues) => {
     try {

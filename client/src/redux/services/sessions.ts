@@ -48,6 +48,9 @@ export const sessionsApi = createApi({
     baseUrl: 'http://localhost:3000/api/',
   }),
   endpoints: (builder) => ({
+    getAllSessions: builder.query<ISessionListResponse[], void>({
+      query: () => `sessions`,
+    }),
     getSessionsByMovieIdAndDate: builder.query<
       ISessionListResponse[],
       { id: string; date: string }
@@ -67,5 +70,8 @@ export const sessionsApi = createApi({
   }),
 })
 
-export const { useGetSessionsByMovieIdAndDateQuery, useCreateSessionMutation } =
-  sessionsApi
+export const {
+  useGetAllSessionsQuery,
+  useGetSessionsByMovieIdAndDateQuery,
+  useCreateSessionMutation,
+} = sessionsApi

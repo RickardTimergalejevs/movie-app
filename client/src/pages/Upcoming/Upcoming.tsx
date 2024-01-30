@@ -23,7 +23,7 @@ const Upcoming = () => {
           <p>Error!</p>
         </div>
       ) : (
-        <MovieList movies={upcomingMovies} showDate={true} />
+        <MovieList movies={upcomingMovies?.results} showDate={true} />
       )}
     </div>
   )

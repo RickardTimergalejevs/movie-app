@@ -33,7 +33,7 @@ const Admin = () => {
     displayType: '',
   }
 
-  const loginSchema = Yup.object().shape({
+  const adminSchema = Yup.object().shape({
     movieId: Yup.number().required('Movie is required'),
     city: Yup.string().required('City is required'),
     showDate: Yup.string().required('Show date is required'),
@@ -60,7 +60,7 @@ const Admin = () => {
         <Formik
           key="session"
           initialValues={initialValuesSession}
-          validationSchema={loginSchema}
+          validationSchema={adminSchema}
           onSubmit={handleSubmit}
         >
           <Form className="session-form">
