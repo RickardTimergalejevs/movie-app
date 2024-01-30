@@ -29,7 +29,10 @@ const MovieSession = () => {
     data: sessionsByMovieIdAndDate,
     error,
     isLoading,
-  } = useGetSessionsByMovieIdAndDateQuery({ id, date: selectedDate })
+  } = useGetSessionsByMovieIdAndDateQuery(
+    { id, date: selectedDate },
+    { pollingInterval: 10000 },
+  )
 
   useEffect(() => {
     if (sessionsByMovieId) {
