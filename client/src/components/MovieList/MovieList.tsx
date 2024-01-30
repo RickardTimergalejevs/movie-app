@@ -6,9 +6,10 @@ type Props = {
   movies?: IMovie[]
   showDate?: boolean
   showRating?: boolean
+  clickable?: boolean
 }
 
-const MovieList = ({ movies, showDate, showRating }: Props) => {
+const MovieList = ({ movies, showDate, showRating, clickable }: Props) => {
   console.log(movies)
 
   return (
@@ -24,6 +25,7 @@ const MovieList = ({ movies, showDate, showRating }: Props) => {
           genre_ids={movie.genre_ids}
           showDate={showDate}
           showRating={showRating}
+          clickable={clickable}
         />
       ))}
     </div>

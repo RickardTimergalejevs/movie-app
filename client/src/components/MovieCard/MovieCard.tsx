@@ -14,6 +14,7 @@ type Props = {
   release_date: string
   showDate?: boolean
   showRating?: boolean
+  clickable?: boolean
 }
 
 type Genre = {
@@ -30,6 +31,7 @@ const MovieCard = ({
   release_date,
   showDate,
   showRating,
+  clickable = true,
 }: Props) => {
   const { data: genres } = useGetGenresQuery()
 
@@ -53,9 +55,19 @@ const MovieCard = ({
             {formatDateWithMonthAbbreviation(release_date)}
           </p>
         )}
-        <Link to={`/movie/${id}`}>
-          <img className="movie__card-img" src={poster_path} alt={title} />
-        </Link>
+        {clickable ? (
+          <Link to={`/movie/${id}`}>
+            <img className="movie__card-img" src={poster_path} alt={title} />
+          </Link>
+        ) : (
+          <img
+            className={`movie__card-img ${
+              !clickable && 'movie__card-img__disabled'
+            }`}
+            src={poster_path}
+            alt={title}
+          />
+        )}
       </div>
       <div className="movie__card-details">
         <h1 className="movie__card-title">{title}</h1>

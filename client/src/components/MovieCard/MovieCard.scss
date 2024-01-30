@@ -15,6 +15,10 @@
       max-width: 100%;
       border: 1px solid $light;
       cursor: pointer;
+
+      &__disabled {
+        cursor: auto;
+      }
     }
 
     .movie-rating {
