@@ -45,19 +45,19 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/checkout',
-        element: <Checkout />,
-      },
-      {
-        path: '/confirmation',
-        element: <Confirmation />,
-      },
-      {
         element: <AuthRoutes />,
         children: [
           {
             path: '/profile',
             element: <Profile />,
+          },
+          {
+            path: '/checkout',
+            element: <Checkout />,
+          },
+          {
+            path: '/confirmation',
+            element: <Confirmation />,
           },
         ],
       },

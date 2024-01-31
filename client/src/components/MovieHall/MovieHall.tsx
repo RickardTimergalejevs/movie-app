@@ -11,6 +11,7 @@ import {
   setTotalPrice,
 } from '../../redux/features/order/orderSlice'
 import NavButton from '../common/NavButton/NavButton'
+import { selectIsAuthenticated } from '../../redux/features/auth/authSlice'
 
 type Props = {
   selectedSession: ISession
@@ -27,6 +28,8 @@ const MovieHall = ({ selectedSession }: Props) => {
     status: 'visible',
     seats: [],
   })
+
+  const isAuthenticated = useSelector(selectIsAuthenticated)
 
   console.log(selectedSession)
 
@@ -213,7 +216,13 @@ const MovieHall = ({ selectedSession }: Props) => {
       </div>
       <div className="session-purchase">
         <p className="session-purchase__total">{`Total: ${totalPrice} kr`}</p>
-        <NavButton children="Checkout" color="green" link="/checkout" />
+        {
+          <NavButton
+            children="Checkout"
+            color="green"
+            link={isAuthenticated ? '/checkout' : '/login'}
+          />
+        }
       </div>
     </div>
   )
