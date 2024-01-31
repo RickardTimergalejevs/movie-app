@@ -45,8 +45,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const [register] = useRegisterMutation()
-  const [login, { error: loginError }] = useLoginMutation()
-  console.log(loginError)
+  const [login] = useLoginMutation()
 
   const handleChangeForm = () => {
     setIsRegisterForm(!isRegisterForm)
@@ -55,8 +54,6 @@ const Login = () => {
   const handleRegister = async (values: IRegisterValues) => {
     try {
       const data = await register(values).unwrap()
-
-      console.log(data)
 
       if (data) {
         navigate('/')
@@ -69,8 +66,6 @@ const Login = () => {
   const handleLogin = async (values: ILoginValues) => {
     try {
       const data = await login(values).unwrap()
-
-      console.log(data)
 
       if (data) {
         navigate('/')
@@ -103,7 +98,6 @@ const Login = () => {
               validationSchema={loginSchema}
               onSubmit={(values, actions) => {
                 handleLogin(values)
-                console.log({ values, actions })
                 actions.setSubmitting(false)
               }}
             >
@@ -134,7 +128,6 @@ const Login = () => {
               validationSchema={registerSchema}
               onSubmit={(values, actions) => {
                 handleRegister(values)
-                console.log({ values, actions })
                 actions.setSubmitting(false)
               }}
             >

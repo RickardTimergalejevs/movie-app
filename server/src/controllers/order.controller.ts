@@ -27,7 +27,6 @@ const createOrder = async (req: Request, res: Response) => {
       row.seats.forEach((seat: any) => {
         if (selectedSeats.includes(seat.seat)) {
           seat.isBooked = true
-          console.log(seat)
         }
       })
     })

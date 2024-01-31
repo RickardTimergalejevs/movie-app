@@ -39,7 +39,9 @@ const Checkout = () => {
   const [createPaymentIntent, { data }] = useCreatePaymentIntentMutation()
   const [createOrder] = useCreateOrderMutation()
 
-  console.log(totalPrice)
+  if (!session) {
+    navigate('/')
+  }
 
   const handleCreateOrder = async () => {
     try {
@@ -56,8 +58,7 @@ const Checkout = () => {
         totalPrice: totalPrice,
       }
 
-      const data = await createOrder(order)
-      console.log(data)
+      await createOrder(order)
     } catch (error) {
       console.error(error)
     }
@@ -66,13 +67,7 @@ const Checkout = () => {
   const handlePaymentIntent = async () => {
     try {
       const amountInOre = totalPrice * 100
-
-      const data = await createPaymentIntent(amountInOre)
-
-      const clientSecret = data
-
-      console.log(clientSecret)
-      console.log(amountInOre)
+      await createPaymentIntent(amountInOre)
     } catch (error) {
       console.error(error)
     }
@@ -81,8 +76,6 @@ const Checkout = () => {
   const options = {
     clientSecret: data?.clientSecret || '',
   }
-
-  console.log(options)
 
   useEffect(() => {
     if (user && user._id) {

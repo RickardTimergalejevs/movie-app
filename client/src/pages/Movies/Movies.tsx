@@ -17,9 +17,6 @@ const Movies = () => {
 
   const isLoading = playingMoviesLoading || sessionsLoading
 
-  console.log(sessions)
-  console.log(moviesWithSessions)
-
   return (
     <div className="movie__page">
       <div className="movie__page-nav">

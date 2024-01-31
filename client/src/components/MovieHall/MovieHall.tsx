@@ -31,8 +31,6 @@ const MovieHall = ({ selectedSession }: Props) => {
 
   const isAuthenticated = useSelector(selectIsAuthenticated)
 
-  console.log(selectedSession)
-
   let totalPrice = 0
 
   if (selectedSession) {
@@ -47,9 +45,6 @@ const MovieHall = ({ selectedSession }: Props) => {
     totalPrice = totalStandardPrice * selectedSeats.length
     dispatch(setTotalPrice(totalPrice))
   }
-
-  console.log('selectedSeats', selectedSeats)
-  console.log('hoveredSeats', hoveredSeats)
 
   const getMaxIndexForRow = (row: string) => {
     const selectedRow = selectedSession.hall.rows.find((r) => r.row === row)

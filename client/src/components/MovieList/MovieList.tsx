@@ -12,8 +12,6 @@ type Props = {
 const POSTER_PATH = import.meta.env.VITE_TMBD_POSTER_PATH
 
 const MovieList = ({ movies, showDate, showRating, clickable }: Props) => {
-  console.log(movies)
-
   return (
     <div className="movie__list">
       {movies?.map((movie) => (

@@ -23,7 +23,6 @@ export const authenticate = (
 ) => {
   const { authorization } = req.headers
 
-  console.log('authorization', authorization)
   if (!authorization) {
     return res.status(401).json({ message: 'Unauthorized' })
   }

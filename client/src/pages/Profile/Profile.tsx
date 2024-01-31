@@ -23,8 +23,6 @@ const Profile = () => {
     dispatch(setUserId(null))
   }
 
-  console.log(getCurrentDate())
-
   const isOrderPast = (orderDate: IOrderListResponse) => {
     const currentDate = getCurrentDate()
     return orderDate.sessionId.showDate < currentDate

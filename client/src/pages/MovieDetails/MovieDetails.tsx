@@ -20,7 +20,6 @@ const MovieDetails = () => {
   const movieId = parseInt(id, 10)
 
   const { data: movie, isLoading } = useGetMovieQuery(movieId)
-  console.log(movie)
 
   return isLoading ? (
     <Loader />

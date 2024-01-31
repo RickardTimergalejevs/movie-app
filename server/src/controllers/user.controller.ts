@@ -52,7 +52,6 @@ const loginUser = async (req: Request, res: Response) => {
           }
 
           const token = user.generateAuthToken()
-          console.log(token)
 
           res
             .status(200)

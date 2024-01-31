@@ -27,9 +27,6 @@ const MovieSession = () => {
     id,
   })
 
-  console.log(sessionsByMovieId?.[0].showDate)
-  console.log(selectedDate)
-
   const { data: sessionsByMovieIdAndDate } =
     useGetSessionsByMovieIdAndDateQuery(
       { id, date: selectedDate },
@@ -53,10 +50,6 @@ const MovieSession = () => {
   if (selectedSession) {
     dispatch(setSession(selectedSession))
   }
-
-  console.log(sessionsByMovieIdAndDate)
-  console.log(selectedSession)
-  console.log('sessionsByMovieId', sessionsByMovieId)
 
   return (
     sessionsByMovieIdAndDate && (
