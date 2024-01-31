@@ -98,7 +98,7 @@ const Checkout = () => {
         <h1 className="checkout-nav__title">Checkout</h1>
       </div>
       <div className="checkout-back-btn">
-        <NavButton children="Back" onClick={() => navigate(-1)} />
+        <NavButton children="Back" color="light" onClick={() => navigate(-1)} />
       </div>
       <div className="checkout-details">
         {session && movie && (

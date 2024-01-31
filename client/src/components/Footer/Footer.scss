@@ -17,9 +17,15 @@ footer {
     }
   }
 
+  hr {
+    width: 30%;
+    border-color: $dark;
+    margin: 1rem;
+  }
+
   .footer__payment {
-    border-top: 1px solid $light;
-    padding-top: 3rem;
-    margin-top: 3rem;
+    img {
+      max-width: 7rem;
+    }
   }
 }

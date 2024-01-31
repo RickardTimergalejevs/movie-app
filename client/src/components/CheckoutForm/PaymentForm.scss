@@ -4,4 +4,8 @@
   background-color: white;
   padding: 1rem;
   color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
 }

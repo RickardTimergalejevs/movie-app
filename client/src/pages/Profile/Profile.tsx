@@ -43,7 +43,7 @@ const Profile = () => {
         <h1 className="profile-nav__title">Profile</h1>
       </div>
       <div className="profile-logout">
-        <NavButton children="Logout" onClick={handleLogout} />
+        <NavButton children="Logout" color="light" onClick={handleLogout} />
       </div>
       {user && (
         <div className="profile-user">
@@ -56,18 +56,31 @@ const Profile = () => {
           <hr />
           <h3 className="tickets-past__title">Past</h3>
           <div className="tickets-list">
-            {pastTickets?.map((order, index) => (
-              <TicketCard order={order} index={index} />
-            ))}
+            {pastTickets && pastTickets?.length !== 0 ? (
+              pastTickets?.map((order, index) => (
+                <TicketCard key={index} order={order} index={index} />
+              ))
+            ) : (
+              <p className="tickets-list__error">No past tickets</p>
+            )}
           </div>
         </div>
         <div className="tickets-current">
           <hr />
           <h3 className="tickets-current__title">Current</h3>
           <div className="tickets-list">
-            {currentTickets?.map((order, index) => (
-              <TicketCard order={order} index={index} showId={true} />
-            ))}
+            {currentTickets && currentTickets?.length !== 0 ? (
+              currentTickets?.map((order, index) => (
+                <TicketCard
+                  key={index}
+                  order={order}
+                  index={index}
+                  showId={true}
+                />
+              ))
+            ) : (
+              <p className="tickets-list__error">No current tickets</p>
+            )}
           </div>
         </div>
       </div>

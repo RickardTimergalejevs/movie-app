@@ -12,10 +12,20 @@
   &--light {
     background-color: $light;
     color: $dark;
+
+    &:hover {
+      background-color: $green;
+      color: $dark;
+    }
   }
 
   &--green {
     background-color: $green;
     color: $dark;
+
+    &:hover {
+      background-color: $light;
+      color: $dark;
+    }
   }
 }
