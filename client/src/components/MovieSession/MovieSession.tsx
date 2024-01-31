@@ -39,9 +39,12 @@ const MovieSession = () => {
   useEffect(() => {
     if (sessionsByMovieId) {
       const currentDate = new Date().toISOString().split('T')[0]
-      const newDates = sessionsByMovieId
-        .map((session) => session.showDate)
-        .filter((date) => date >= currentDate)
+      const uniqueDatesSet = new Set(
+        sessionsByMovieId
+          .map((session) => session.showDate)
+          .filter((date) => date >= currentDate),
+      )
+      const newDates = Array.from(uniqueDatesSet)
       setDates(newDates)
       setSelectedDate(newDates[0])
     }

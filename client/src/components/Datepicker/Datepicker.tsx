@@ -48,8 +48,8 @@ const Datepicker: React.FC<Props> = ({
           </p>
         </div>
         <div className="session-date__dates">
-          {dates.map((date) => (
-            <div className="date" key={date}>
+          {dates.map((date, index) => (
+            <div className="date" key={index}>
               <p className="session-date__type">{formatDayOfWeek(date)}</p>
               <Button
                 children={formatToDay(date)}

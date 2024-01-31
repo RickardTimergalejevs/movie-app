@@ -16,7 +16,7 @@ const Header = () => {
     <header>
       <div className="header__logo">
         <p className="header__text">
-          <Link to="/">Cineplex</Link>
+          <Link to="/">Cinema</Link>
         </p>
       </div>
       <nav className="header__nav">

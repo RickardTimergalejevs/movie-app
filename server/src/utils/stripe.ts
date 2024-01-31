@@ -1,9 +1,10 @@
 import Stripe from 'stripe'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const initStripe = (): Stripe => {
-  return new Stripe(
-    'sk_test_51No0MbDTXgg9R4l7mkFxUDuTQPXfCBg3BAxk3rHQAnKVutbNw7rDoEhfLdyFV34gueBkPSIvNffNfwxGd39Ss8um009CbdPsLo',
-  )
+  return new Stripe(process.env.STRIPE_SECRET_KEY || '')
 }
 
 export { initStripe }
