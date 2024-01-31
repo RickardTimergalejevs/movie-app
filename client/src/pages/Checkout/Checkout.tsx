@@ -19,7 +19,6 @@ import { loadStripe } from '@stripe/stripe-js'
 import PaymentForm from '../../components/CheckoutForm/PaymentForm'
 import { useCreatePaymentIntentMutation } from '../../redux/services/checkout'
 import { useCreateOrderMutation } from '../../redux/services/order'
-import Button from '../../components/common/Button/Button'
 
 const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY
 
@@ -142,9 +141,9 @@ const Checkout = () => {
           </Elements>
         )}
       </div>
-      <div>
-        <Button children="Buy" color="green" onClick={handlePaymentIntent} />
-      </div>
+      <button className="checkout-buy-btn" onClick={handlePaymentIntent}>
+        Buy
+      </button>
     </div>
   )
 }

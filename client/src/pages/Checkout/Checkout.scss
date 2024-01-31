@@ -69,4 +69,18 @@
       }
     }
   }
+
+  .checkout-buy-btn {
+    padding: 0.5rem;
+    background-color: $light;
+    color: $dark;
+    font-family: $Archivo-Black;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $green;
+    }
+  }
 }
