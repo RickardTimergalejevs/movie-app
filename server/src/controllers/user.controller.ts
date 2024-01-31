@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import UserModel from '../models/user.model'
 
 interface AuthenticatedRequest extends Request {
-  user?: any // Adjust the type according to your user object structure
+  user?: any
 }
 
 const registerUser = async (req: Request, res: Response) => {
@@ -52,7 +52,6 @@ const loginUser = async (req: Request, res: Response) => {
           }
 
           const token = user.generateAuthToken()
-          console.log(token)
 
           res
             .status(200)

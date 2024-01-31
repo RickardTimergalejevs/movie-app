@@ -1,3 +1,4 @@
+/* Example: 19 OCT 2023 */
 export const formatDateWithMonthAbbreviation = (dt: string) => {
   const date = new Date(dt)
 
@@ -23,6 +24,7 @@ export const formatDateWithMonthAbbreviation = (dt: string) => {
   return `${day} ${monthAbbreviation} ${year}`
 }
 
+/* Example: Wednesday, Jan 31 */
 export const formatDateWithWeekdayMonthAbbreviation = (dt: string) => {
   const date = new Date(dt)
 
@@ -57,6 +59,7 @@ export const formatDateWithWeekdayMonthAbbreviation = (dt: string) => {
   return `${weekDay}, ${monthAbbreviation} ${day}`
 }
 
+/* Example: Sun */
 export const formatDayOfWeek = (dt: string) => {
   const date = new Date(dt)
 
@@ -67,6 +70,7 @@ export const formatDayOfWeek = (dt: string) => {
   return weekAbbreviation
 }
 
+/* Example: DD */
 export const formatToDay = (dt: string) => {
   const date = new Date(dt)
 
@@ -75,6 +79,7 @@ export const formatToDay = (dt: string) => {
   return day
 }
 
+/* Example: 2 h 4 min */
 export const convertToHoursAndMinutes = (minutes: number) => {
   const hours = Math.floor(minutes / 60)
   const remainingMinutes = minutes % 60

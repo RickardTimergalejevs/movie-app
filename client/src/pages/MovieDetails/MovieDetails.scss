@@ -7,12 +7,20 @@
   .movie-body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     border-left: 2px solid $light;
     width: 20rem;
 
     &__img {
       border-bottom: 2px solid $light;
     }
+  }
+
+  .movie-body-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
   }
 
   .movie-description {
@@ -27,12 +35,6 @@
       &:nth-of-type(3) {
         padding-top: 1rem;
       }
-    }
-
-    &__overview {
-    }
-
-    &__date {
     }
   }
 
@@ -70,9 +72,6 @@
     justify-content: end;
     gap: 1rem;
     margin-top: 1rem;
-
-    &__runtime {
-    }
 
     &__age {
       display: flex;
@@ -121,8 +120,9 @@
 }
 
 .movie-container {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .movie-body {

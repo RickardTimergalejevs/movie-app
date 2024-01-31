@@ -1,6 +1,25 @@
 @import '../../../styles/variables';
 
 .payment-form {
-  border-left: 2px $light solid;
+  background-color: white;
   padding: 1rem;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+
+  &__btn {
+    padding: 0.5rem;
+    background-color: $light;
+    color: $dark;
+    font-family: $Archivo-Black;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $green;
+    }
+  }
 }

@@ -52,10 +52,12 @@ interface IGenreListResponse {
   genres: []
 }
 
+const MOVIES_URL = import.meta.env.VITE_MOVIES_URL
+
 export const moviesApi = createApi({
   reducerPath: 'moviesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.themoviedb.org/3/',
+    baseUrl: MOVIES_URL,
     headers: {
       Authorization: `Bearer ${import.meta.env.VITE_TMBD_TOKEN}`,
     },

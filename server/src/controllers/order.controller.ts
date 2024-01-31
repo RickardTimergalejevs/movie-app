@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import OrderModel from '../models/order.model'
-import SessionModel, { ISession } from '../models/session.model'
+import SessionModel from '../models/session.model'
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -27,7 +27,6 @@ const createOrder = async (req: Request, res: Response) => {
       row.seats.forEach((seat: any) => {
         if (selectedSeats.includes(seat.seat)) {
           seat.isBooked = true
-          console.log(seat)
         }
       })
     })

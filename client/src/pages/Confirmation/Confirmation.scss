@@ -1,10 +1,10 @@
 @import '../../../styles/variables';
 
-.movie__page {
-  .movie__page-nav {
+.confirmation__page {
+  .confirmation-nav {
     position: relative;
     text-align: center;
-    margin: 3rem 0;
+    margin: 3rem 0 0;
 
     hr {
       position: relative;
@@ -12,7 +12,7 @@
       border: 1px solid $light;
     }
 
-    .movie__page-title {
+    &__title {
       position: relative;
       display: inline-block;
       font-family: $Archivo-Black;
@@ -22,8 +22,10 @@
     }
   }
 
-  .movie__page-error {
+  .confirmation-info {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
   }
 }

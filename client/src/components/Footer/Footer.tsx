@@ -4,10 +4,11 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer__logo">
-        <p className="footer__text">Cinemax</p>
+        <p className="footer__text">Cinema</p>
       </div>
+      <hr />
       <div className="footer__payment">
-        <p>Stripe</p>
+        <img src="/stripe.png" alt="stripe" />
       </div>
     </footer>
   )

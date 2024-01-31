@@ -1,11 +1,4 @@
-import {
-  ErrorMessage,
-  Field,
-  FieldProps,
-  Form,
-  Formik,
-  FormikHelpers,
-} from 'formik'
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import Input from '../../components/common/Input/Input'
 import * as Yup from 'yup'
 import './Admin.scss'
@@ -14,7 +7,7 @@ import { useGetPlayingMoviesQuery } from '../../redux/services/movies'
 import { useCreateSessionMutation } from '../../redux/services/sessions'
 
 const Admin = () => {
-  const { data: movie, isLoading, isError } = useGetPlayingMoviesQuery(1)
+  const { data: movie } = useGetPlayingMoviesQuery(1)
   const [createSession, { isSuccess }] = useCreateSessionMutation()
 
   interface ISessionValues {
@@ -33,7 +26,7 @@ const Admin = () => {
     displayType: '',
   }
 
-  const loginSchema = Yup.object().shape({
+  const adminSchema = Yup.object().shape({
     movieId: Yup.number().required('Movie is required'),
     city: Yup.string().required('City is required'),
     showDate: Yup.string().required('Show date is required'),
@@ -49,6 +42,12 @@ const Admin = () => {
     resetForm()
   }
 
+  const today = new Date()
+  const minDate = today.toISOString().split('T')[0]
+  const maxDate = new Date(today.setDate(today.getDate() + 4))
+    .toISOString()
+    .split('T')[0]
+
   return (
     <div className="admin__page">
       <div className="admin-nav">
@@ -60,7 +59,7 @@ const Admin = () => {
         <Formik
           key="session"
           initialValues={initialValuesSession}
-          validationSchema={loginSchema}
+          validationSchema={adminSchema}
           onSubmit={handleSubmit}
         >
           <Form className="session-form">
@@ -93,6 +92,8 @@ const Admin = () => {
               type="date"
               name="showDate"
               id="showDate"
+              min={minDate}
+              max={maxDate}
               component={Input}
             />
             <label>Select time</label>

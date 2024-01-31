@@ -23,7 +23,6 @@ export const authenticate = (
 ) => {
   const { authorization } = req.headers
 
-  console.log('authorization', authorization)
   if (!authorization) {
     return res.status(401).json({ message: 'Unauthorized' })
   }
@@ -36,5 +35,5 @@ export const authenticate = (
 }
 
 export const generateAccessToken = (user: IUser) => {
-  return jwt.sign(user, secretKey, { expiresIn: '30m' })
+  return jwt.sign(user, secretKey, { expiresIn: '60m' })
 }

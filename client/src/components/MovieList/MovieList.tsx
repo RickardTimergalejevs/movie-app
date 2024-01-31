@@ -1,29 +1,31 @@
-import { IMovieListResponse } from '../../interfaces/movie'
+import { IMovie } from '../../interfaces/movie'
 import MovieCard from '../MovieCard/MovieCard'
 import './MovieList.scss'
 
 type Props = {
-  movies?: IMovieListResponse
+  movies?: IMovie[]
   showDate?: boolean
   showRating?: boolean
+  clickable?: boolean
 }
 
-const MovieList = ({ movies, showDate, showRating }: Props) => {
-  console.log(movies)
+const POSTER_PATH = import.meta.env.VITE_TMBD_POSTER_PATH
 
+const MovieList = ({ movies, showDate, showRating, clickable }: Props) => {
   return (
     <div className="movie__list">
-      {movies?.results.map((movie) => (
+      {movies?.map((movie) => (
         <MovieCard
           key={movie.id}
           id={movie.id}
           title={movie.title}
-          poster_path={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          poster_path={`${POSTER_PATH}${movie.poster_path}`}
           vote_average={movie.vote_average}
           release_date={movie.release_date}
           genre_ids={movie.genre_ids}
           showDate={showDate}
           showRating={showRating}
+          clickable={clickable}
         />
       ))}
     </div>

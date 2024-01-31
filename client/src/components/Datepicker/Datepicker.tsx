@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   formatDateWithWeekdayMonthAbbreviation,
   formatDayOfWeek,
@@ -42,12 +42,14 @@ const Datepicker: React.FC<Props> = ({
       <div className="session-date">
         <div className="session-date__title-container">
           <p className="session-date__title">
-            {formatDateWithWeekdayMonthAbbreviation(selectedDate)}
+            {selectedDate
+              ? formatDateWithWeekdayMonthAbbreviation(selectedDate)
+              : 'Show Date'}
           </p>
         </div>
         <div className="session-date__dates">
-          {dates.map((date) => (
-            <div className="date" key={date}>
+          {dates.map((date, index) => (
+            <div className="date" key={index}>
               <p className="session-date__type">{formatDayOfWeek(date)}</p>
               <Button
                 children={formatToDay(date)}
@@ -64,17 +66,21 @@ const Datepicker: React.FC<Props> = ({
           <p className="session-time__title">Show Time</p>
         </div>
         <div className="session-time__time">
-          {sessions?.map((session) => (
-            <div className="time" key={session._id}>
-              <p className="session-time__type">{session.displayType}</p>
-              <Button
-                children={session.showTime}
-                color="dark"
-                selected={session === selectedSession}
-                onClick={() => handleSessionClick(session)}
-              />
-            </div>
-          ))}
+          {sessions.length > 0 ? (
+            sessions?.map((session) => (
+              <div className="time" key={session._id}>
+                <p className="session-time__type">{session.displayType}</p>
+                <Button
+                  children={session.showTime}
+                  color="dark"
+                  selected={session === selectedSession}
+                  onClick={() => handleSessionClick(session)}
+                />
+              </div>
+            ))
+          ) : (
+            <p>Select date</p>
+          )}
         </div>
       </div>
     </div>

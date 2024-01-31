@@ -27,6 +27,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
+    padding: 2rem;
 
     .checkout-session-card {
       font-style: italic;
@@ -66,6 +67,20 @@
           gap: 0.3rem;
         }
       }
+    }
+  }
+
+  .checkout-buy-btn {
+    padding: 0.5rem;
+    background-color: $light;
+    color: $dark;
+    font-family: $Archivo-Black;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $green;
     }
   }
 }

@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IOrder } from '../../interfaces/order'
 import { ISession } from '../../interfaces/session'
 
 export interface IOrderListResponse {
@@ -19,10 +18,12 @@ interface ICreateOrderRequest {
   totalPrice: number
 }
 
+const ORDERS_URL = import.meta.env.VITE_ORDERS_URL
+
 export const ordersApi = createApi({
   reducerPath: 'ordersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/orders/',
+    baseUrl: ORDERS_URL,
   }),
   endpoints: (builder) => ({
     getOrders: builder.query<IOrderListResponse[], string>({

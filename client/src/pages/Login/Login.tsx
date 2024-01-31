@@ -44,7 +44,7 @@ const Login = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false)
   const navigate = useNavigate()
 
-  const [register, { isSuccess }] = useRegisterMutation()
+  const [register] = useRegisterMutation()
   const [login] = useLoginMutation()
 
   const handleChangeForm = () => {
@@ -54,8 +54,6 @@ const Login = () => {
   const handleRegister = async (values: IRegisterValues) => {
     try {
       const data = await register(values).unwrap()
-
-      console.log(data)
 
       if (data) {
         navigate('/')
@@ -68,8 +66,6 @@ const Login = () => {
   const handleLogin = async (values: ILoginValues) => {
     try {
       const data = await login(values).unwrap()
-
-      console.log(data)
 
       if (data) {
         navigate('/')
@@ -102,7 +98,6 @@ const Login = () => {
               validationSchema={loginSchema}
               onSubmit={(values, actions) => {
                 handleLogin(values)
-                console.log({ values, actions })
                 actions.setSubmitting(false)
               }}
             >
@@ -133,7 +128,6 @@ const Login = () => {
               validationSchema={registerSchema}
               onSubmit={(values, actions) => {
                 handleRegister(values)
-                console.log({ values, actions })
                 actions.setSubmitting(false)
               }}
             >
@@ -179,6 +173,7 @@ const Login = () => {
               </Form>
             </Formik>
           )}
+
           <div className="login-footer">
             <p className="login-footer__title">Or</p>
             <p className="login-footer__type" onClick={handleChangeForm}>

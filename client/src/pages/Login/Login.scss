@@ -3,6 +3,7 @@
 .login__page {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 3rem 0;
 }
 
@@ -13,9 +14,6 @@
   gap: 3rem;
   padding: 2rem 4rem;
   min-width: 25rem;
-
-  .login-title {
-  }
 
   .login-form {
     display: flex;

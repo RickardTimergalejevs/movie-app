@@ -4,15 +4,17 @@ interface ICheckout {
   clientSecret: string
 }
 
+const CHECKOUT_URL = import.meta.env.VITE_CHECKOUT_URL
+
 export const checkoutApi = createApi({
   reducerPath: 'checkoutApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/',
+    baseUrl: CHECKOUT_URL,
   }),
   endpoints: (builder) => ({
     createPaymentIntent: builder.mutation<ICheckout, number>({
       query: (amount) => ({
-        url: '/create-payment-intent',
+        url: 'create-payment-intent',
         method: 'POST',
         body: { amount },
       }),

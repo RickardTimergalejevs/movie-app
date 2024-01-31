@@ -11,6 +11,7 @@ import {
   setTotalPrice,
 } from '../../redux/features/order/orderSlice'
 import NavButton from '../common/NavButton/NavButton'
+import { selectIsAuthenticated } from '../../redux/features/auth/authSlice'
 
 type Props = {
   selectedSession: ISession
@@ -28,7 +29,7 @@ const MovieHall = ({ selectedSession }: Props) => {
     seats: [],
   })
 
-  console.log(selectedSession)
+  const isAuthenticated = useSelector(selectIsAuthenticated)
 
   let totalPrice = 0
 
@@ -44,9 +45,6 @@ const MovieHall = ({ selectedSession }: Props) => {
     totalPrice = totalStandardPrice * selectedSeats.length
     dispatch(setTotalPrice(totalPrice))
   }
-
-  console.log('selectedSeats', selectedSeats)
-  console.log('hoveredSeats', hoveredSeats)
 
   const getMaxIndexForRow = (row: string) => {
     const selectedRow = selectedSession.hall.rows.find((r) => r.row === row)
@@ -213,7 +211,13 @@ const MovieHall = ({ selectedSession }: Props) => {
       </div>
       <div className="session-purchase">
         <p className="session-purchase__total">{`Total: ${totalPrice} kr`}</p>
-        <NavButton children="Checkout" color="green" link="/checkout" />
+        {
+          <NavButton
+            children="Checkout"
+            color="green"
+            link={isAuthenticated ? '/checkout' : '/login'}
+          />
+        }
       </div>
     </div>
   )

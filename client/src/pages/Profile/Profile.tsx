@@ -7,20 +7,21 @@ import {
   IOrderListResponse,
   useGetOrdersQuery,
 } from '../../redux/services/order'
-import { useGetMovieQuery } from '../../redux/services/movies'
+
 import { getCurrentDate } from '../../utils/dateFormatter'
+import TicketCard from '../../components/TicketCard/TicketCard'
+import { setUserId } from '../../redux/features/order/orderSlice'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
   const dispatch = useDispatch()
-  const { data: order, isLoading, isError } = useGetOrdersQuery(user?._id || '')
+  const { data: order } = useGetOrdersQuery(user?._id || '')
 
   const handleLogout = () => {
     dispatch(logout())
     localStorage.removeItem('token')
+    dispatch(setUserId(null))
   }
-
-  console.log(getCurrentDate())
 
   const isOrderPast = (orderDate: IOrderListResponse) => {
     const currentDate = getCurrentDate()
@@ -42,7 +43,7 @@ const Profile = () => {
         <h1 className="profile-nav__title">Profile</h1>
       </div>
       <div className="profile-logout">
-        <NavButton children="Logout" onClick={handleLogout} />
+        <NavButton children="Logout" color="light" onClick={handleLogout} />
       </div>
       {user && (
         <div className="profile-user">
@@ -55,73 +56,31 @@ const Profile = () => {
           <hr />
           <h3 className="tickets-past__title">Past</h3>
           <div className="tickets-list">
-            {pastTickets?.map((order, index) => (
-              <div className="ticket-card" key={index}>
-                <div className="ticket-card-details">
-                  <h1 className="ticket-card-details__field">
-                    {order.sessionId.movieId}
-                  </h1>
-                  <p className="ticket-card-details__field">
-                    <span>Date: </span>
-                    {order.sessionId?.showDate}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Time: </span>
-                    {order.sessionId?.showTime}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Type: </span>
-                    {order.sessionId?.displayType}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Places: </span>
-                    {order.selectedSeats.join(', ')}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Total Price: </span>
-                    {order.totalPrice} kr
-                  </p>
-                </div>
-              </div>
-            ))}
+            {pastTickets && pastTickets?.length !== 0 ? (
+              pastTickets?.map((order, index) => (
+                <TicketCard key={index} order={order} index={index} />
+              ))
+            ) : (
+              <p className="tickets-list__error">No past tickets</p>
+            )}
           </div>
         </div>
         <div className="tickets-current">
           <hr />
           <h3 className="tickets-current__title">Current</h3>
           <div className="tickets-list">
-            {currentTickets?.map((order, index) => (
-              <div className="ticket-card" key={index}>
-                <div className="ticket-card-details">
-                  <h1 className="ticket-card-details__field">
-                    {order.sessionId.movieId}
-                  </h1>
-                  <p className="ticket-card-details__field">
-                    <span>Date: </span>
-                    {order.sessionId?.showDate}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Time: </span>
-                    {order.sessionId?.showTime}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Type: </span>
-                    {order.sessionId?.displayType}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Places: </span>
-                    {order.selectedSeats.join(', ')}
-                  </p>
-                  <p className="ticket-card-details__field">
-                    <span>Total Price: </span>
-                    {order.totalPrice} kr
-                  </p>
-                </div>
-                <div className="ticket-card__id">
-                  <p>{order._id}</p>
-                </div>
-              </div>
-            ))}
+            {currentTickets && currentTickets?.length !== 0 ? (
+              currentTickets?.map((order, index) => (
+                <TicketCard
+                  key={index}
+                  order={order}
+                  index={index}
+                  showId={true}
+                />
+              ))
+            ) : (
+              <p className="tickets-list__error">No current tickets</p>
+            )}
           </div>
         </div>
       </div>
