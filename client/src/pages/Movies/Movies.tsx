@@ -28,8 +28,10 @@ const Movies = () => {
       </div>
       {isLoading ? (
         <Loader />
-      ) : (
+      ) : moviesWithSessions?.length !== 0 ? (
         <MovieList movies={moviesWithSessions} showRating={true} />
+      ) : (
+        <p className="movie__page-error">No sessions</p>
       )}
     </div>
   )
