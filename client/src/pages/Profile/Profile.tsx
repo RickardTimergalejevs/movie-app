@@ -10,6 +10,7 @@ import {
 
 import { getCurrentDate } from '../../utils/dateFormatter'
 import TicketCard from '../../components/TicketCard/TicketCard'
+import { setUserId } from '../../redux/features/order/orderSlice'
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
@@ -19,6 +20,7 @@ const Profile = () => {
   const handleLogout = () => {
     dispatch(logout())
     localStorage.removeItem('token')
+    dispatch(setUserId(null))
   }
 
   console.log(getCurrentDate())
